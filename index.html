@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bharat Audyogik Vikas Yojna (BHAVYA) Portal - Developing 100 Plug and Play Industrial Parks across India. A DPIIT and NICDC initiative.">
+  <title>Bharat Audyogik Vikas Yojna (BHAVYA)</title>
+  
+  <!-- Google Fonts: Inter for UI/Body, Outfit for Headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6.4.0 CDN for modern icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-container">
+      
+      <!-- Left side: Government Brand -->
+      <div class="header-left">
+        <!-- Stylized SVG Indian Emblem -->
+        <svg class="emblem-svg" viewBox="0 0 100 120" width="45" height="54" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stylized Ashoka Pillar Lion Capital silhouette / vector representation -->
+          <path d="M50 15 L52 20 L58 20 L53 24 L55 30 L50 26 L45 30 L47 24 L42 20 L48 20 Z" fill="#b91c1c" />
+          <path d="M50 30 Q60 40 60 55 H40 Q40 40 50 30 Z" fill="#b91c1c" opacity="0.8"/>
+          <rect x="42" y="55" width="16" height="6" rx="2" fill="#d97706" />
+          <circle cx="50" cy="58" r="3" fill="#1e3a8a" />
+          <!-- Base lotus shape -->
+          <path d="M35 70 C35 60, 65 60, 65 70 C65 80, 35 80, 35 70 Z" fill="#15803d" />
+          <!-- Satyamev Jayate text placeholder/graphic -->
+          <rect x="30" y="80" width="40" height="4" fill="#1e293b" />
+        </svg>
+        <div class="gov-text">
+          <div class="hindi-text">उद्योग संवर्धन और आंतरिक व्यापार विभाग</div>
+          <div class="english-text">Department for Promotion of Industry and Internal Trade</div>
+          <div class="ministry-text">Ministry of Commerce and Industry, Government of India</div>
+        </div>
+      </div>
+
+      <!-- Center: Project Title -->
+      <div class="header-center">
+        <h1 class="project-hindi">भारत औद्योगिक विकास योजना (भव्य)</h1>
+        <h2 class="project-english">Bharat Audyogik Vikas Yojna (BHAVYA)</h2>
+      </div>
+
+      <!-- Right side: Actions -->
+      <div class="header-right">
+        <button id="openLoginBtn" class="btn btn-primary btn-login">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Log In</span>
+        </button>
+        <!-- NICDC Logo -->
+        <div class="nicdc-logo">
+          <div class="nicdc-icon">
+            <i class="fa-solid fa-tree-city"></i>
+          </div>
+          <div class="nicdc-text">
+            <span>एन आई सी डी सी</span>
+            <strong>NICDC</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Scrolling News Ticker -->
+  <section class="ticker-section">
+    <div class="ticker-label">
+      <i class="fa-solid fa-bullhorn"></i>
+      <span>Updates</span>
+    </div>
+    <div class="ticker-content">
+      <div class="ticker-track">
+        <span class="ticker-item"><i class="fa-solid fa-circle-check"></i> Financial Outlay: ₹55,000 Crore approved for the scheme.</span>
+        <span class="ticker-item"><i class="fa-solid fa-circle-check"></i> Financial support of up to ₹1 Crore per acre for infrastructure development.</span>
+        <span class="ticker-item"><i class="fa-solid fa-circle-check"></i> Developing 100 Plug-and-Play Industrial Parks across competitive locations.</span>
+        <span class="ticker-item"><i class="fa-solid fa-circle-check"></i> Aligned with the PM GatiShakti National Master Plan principles.</span>
+        <span class="ticker-item"><i class="fa-solid fa-circle-check"></i> Single-window systems enabled for accelerated clearances.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero / Banner Section -->
+  <section class="hero-section">
+    <div class="hero-background" style="background-image: url('assets/banner_graphic.png');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-badge">Bharat Audyogik Vikas Yojna (BHAVYA)</div>
+      
+      <div class="hero-content">
+        <!-- Left Column: Big Brand Text -->
+        <div class="hero-left">
+          <h2 class="hero-hindi-title">भव्य Yojna</h2>
+          <p class="hero-subtitle">Transforming India's Industrial Landscape</p>
+        </div>
+        
+        <!-- Right Column: Key Details -->
+        <div class="hero-right">
+          <div class="hero-card">
+            <span class="card-tag">MEGA PLAN</span>
+            <h3>FOR DEVELOPMENT OF</h3>
+            <div class="number-highlight">100</div>
+            <h4>PLUG AND PLAY INDUSTRIAL PARKS</h4>
+            <p>Ready-to-use infrastructure matching global standards to boost domestic and foreign investments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Tabs Section -->
+  <section class="tabs-section">
+    <div class="container">
+      <div class="tabs-grid">
+        <a href="#" class="tab-link"><i class="fa-solid fa-circle-play"></i> Tutorial</a>
+        <a href="#" class="tab-link"><i class="fa-solid fa-bell"></i> Notification</a>
+        <a href="#" class="tab-link"><i class="fa-solid fa-file-pdf"></i> Scheme Guidelines</a>
+        <a href="#" class="tab-link"><i class="fa-solid fa-book"></i> SOP</a>
+        <a href="#" class="tab-link"><i class="fa-solid fa-file-lines"></i> Template DPR</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Info Section (About + Video) -->
+  <section class="about-section">
+    <div class="container grid-2">
+      
+      <!-- Left: About Text -->
+      <div class="about-card">
+        <h3 class="section-title">About BHAVYA</h3>
+        <div class="divider"></div>
+        <p class="about-paragraph">
+          BHAVYA aims to develop 100 investment-ready plug-and-play industrial parks in and near cities, in partnership with States, Central Public Sector Undertakings and the private sector. The scheme focuses on high-quality infrastructure, proximity to urban centres, multimodal logistics connectivity, and seamless industrial ecosystem development to help investors ground investments with ease.
+        </p>
+        <p class="about-paragraph">
+          BHAVYA is designed to strengthen India's manufacturing capacity by providing high-quality industrial infrastructure, seamless multimodal connectivity, logistics access, worker-support facilities, digital infrastructure, and sustainable operations.
+        </p>
+      </div>
+
+      <!-- Right: Styled Video Frame -->
+      <div class="video-container">
+        <div class="video-wrapper">
+          <div class="video-poster">
+            <div class="video-overlay-tint"></div>
+            <i class="fa-solid fa-play play-icon"></i>
+            <div class="video-tag">ANI Exclusive</div>
+          </div>
+          <!-- Real HTML Video Element with controls -->
+          <video id="introVideo" controls poster="assets/meeting1.png" style="display: none;">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-footer-info">
+            <span>National Industrial Corridor Development Presentation (3:56)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Vision & Mission Section -->
+  <section class="vision-mission-section">
+    <div class="container grid-2">
+      
+      <!-- Vision Card -->
+      <div class="vm-card">
+        <div class="vm-icon"><i class="fa-solid fa-eye"></i></div>
+        <h3>VISION</h3>
+        <p>To create a globally competitive industrial ecosystem that enables India to emerge as a leading manufacturing and investment destination.</p>
+      </div>
+
+      <!-- Mission Card -->
+      <div class="vm-card">
+        <div class="vm-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <h3>MISSION</h3>
+        <p>To facilitate development of 100 industrial parks with plug-and-play infrastructure, efficient approvals, multimodal connectivity, and long-term operational sustainability.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PM Quote Card Section -->
+  <section class="quote-section">
+    <div class="container">
+      <div class="quote-card-container">
+        <div class="quote-avatar">
+          <img src="assets/pm_modi.png" alt="Prime Minister Portrait">
+        </div>
+        <div class="quote-content">
+          <span class="quote-icon-left"><i class="fa-solid fa-quote-left"></i></span>
+          <p class="quote-text">
+            A landmark step towards accelerating India's industrial growth! The Union Cabinet has approved Bharat Audyogik Vikas Yojna (BHAVYA). This will enable the development of 100 plug-and-play industrial parks, boosting manufacturing, investment and jobs across the nation. The scheme will significantly enhance Ease of Doing Business through streamlined approvals and single-window systems. It will boost logistics and services sectors too.
+          </p>
+          <span class="quote-icon-right"><i class="fa-solid fa-quote-right"></i></span>
+          <div class="quote-footer">
+            <span class="quote-date">18 MARCH 2026</span>
+            <a href="https://pib.gov.in" target="_blank" class="btn btn-secondary btn-press">
+              <i class="fa-solid fa-newspaper"></i> PRESS RELEASE
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery Grid -->
+  <section class="gallery-section">
+    <div class="container">
+      <h3 class="section-title text-center">Gallery & Events</h3>
+      <div class="divider center"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="assets/meeting1.png" alt="Cabinet Review Meeting">
+          <div class="gallery-caption">Cabinet Review Meeting</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/meeting2.png" alt="Industrial Seminar">
+          <div class="gallery-caption">National Industrial Seminar</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/meeting3.png" alt="Officer Briefing">
+          <div class="gallery-caption">DPIIT Officers Briefing</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/meeting4.png" alt="Project Launch">
+          <div class="gallery-caption">BHAVYA Scheme Launch</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-card">
+        <h3 class="card-title">Contact Us</h3>
+        <div class="divider"></div>
+        
+        <div class="contact-grid">
+          <!-- Col 1: Phone & Email -->
+          <div class="contact-col">
+            <div class="contact-item">
+              <i class="fa-solid fa-phone"></i>
+              <div class="contact-details">
+                <strong>Helpline Number</strong>
+                <span>011-65260100</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div class="contact-details">
+                <strong>Support Email</strong>
+                <span>bhavya[dot]support[at]nicdc[dot]in</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2: Address -->
+          <div class="contact-col">
+            <div class="contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div class="contact-details">
+                <strong>Address</strong>
+                <span>National Industrial Corridor Development Corporation Limited</span>
+                <span class="small-text">CIN No.: U45400DL2008PLC172316</span>
+                <span class="address-text">17th Floor, Hindustan Times House, 18-20, Kasturba Gandhi Marg, New Delhi 110001</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 3: Hours -->
+          <div class="contact-col">
+            <div class="contact-item">
+              <i class="fa-solid fa-clock"></i>
+              <div class="contact-details">
+                <strong>Business Hours</strong>
+                <span>Monday - Friday: 09:30 am - 06:30 pm</span>
+                <span>Saturday, Sunday & Holidays: Closed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-container">
+      <span>All rights reserved &copy; 2026 - Developed by NICDC</span>
+    </div>
+  </footer>
+
+  <!-- Login Modal Overlay -->
+  <div id="loginModal" class="modal-overlay">
+    <div class="modal-card">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-logo">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Secure Sign In</span>
+        </div>
+        <button id="closeLoginBtn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <h3 class="modal-title">Sign in to BHAVYA</h3>
+        <p class="modal-subtitle">Choose your portal role and enter credentials.</p>
+
+        <form id="loginForm" novalidate>
+          
+          <!-- Role Radio Group -->
+          <div class="role-selector">
+            <label class="role-option">
+              <input type="radio" name="role" value="state_officer" required>
+              <div class="role-box">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>State Officer</span>
+              </div>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="role" value="reviewer">
+              <div class="role-box">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>Reviewer</span>
+              </div>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="role" value="admin">
+              <div class="role-box">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Admin</span>
+              </div>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="role" value="dpiit">
+              <div class="role-box">
+                <i class="fa-solid fa-building-gov"></i>
+                <span>DPIIT</span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Username Input -->
+          <div class="input-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input type="text" id="username" autocomplete="off" placeholder="Enter username" required>
+              <i class="fa-solid fa-circle-check status-icon success"></i>
+              <i class="fa-solid fa-circle-exclamation status-icon error"></i>
+            </div>
+            <!-- Dynamic validation feedback checklist -->
+            <div class="validation-checklist" id="usernameChecklist">
+              <div class="checklist-title">Username requirements:</div>
+              <div class="check-item" data-rule="length"><i class="fa-solid fa-circle-xmark"></i> 8-15 characters</div>
+              <div class="check-item" data-rule="uppercase"><i class="fa-solid fa-circle-xmark"></i> At least 1 UPPERCASE letter</div>
+              <div class="check-item" data-rule="special"><i class="fa-solid fa-circle-xmark"></i> At least 1 special character</div>
+              <div class="check-item" data-rule="nospaces"><i class="fa-solid fa-circle-xmark"></i> No spaces</div>
+            </div>
+          </div>
+
+          <!-- Password Input -->
+          <div class="input-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="password" placeholder="Enter password" required>
+              <button type="button" id="togglePasswordBtn" class="toggle-password-btn">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <i class="fa-solid fa-circle-check status-icon success"></i>
+              <i class="fa-solid fa-circle-exclamation status-icon error"></i>
+            </div>
+            <!-- Dynamic validation feedback checklist -->
+            <div class="validation-checklist" id="passwordChecklist">
+              <div class="checklist-title">Password requirements:</div>
+              <div class="check-item" data-rule="length"><i class="fa-solid fa-circle-xmark"></i> 8-15 characters</div>
+              <div class="check-item" data-rule="uppercase"><i class="fa-solid fa-circle-xmark"></i> At least 1 UPPERCASE letter</div>
+              <div class="check-item" data-rule="lowercase"><i class="fa-solid fa-circle-xmark"></i> At least 1 lowercase letter</div>
+              <div class="check-item" data-rule="number"><i class="fa-solid fa-circle-xmark"></i> At least 1 digit (0-9)</div>
+              <div class="check-item" data-rule="special"><i class="fa-solid fa-circle-xmark"></i> At least 1 special character</div>
+              <div class="check-item" data-rule="nospaces"><i class="fa-solid fa-circle-xmark"></i> No spaces</div>
+            </div>
+          </div>
+
+          <!-- Captcha Box (Simulated with refreshing logic) -->
+          <div class="input-group">
+            <label for="captchaInput">Security Verification</label>
+            <div class="captcha-container">
+              <div class="captcha-box" id="captchaBox">A58bY</div>
+              <button type="button" class="btn-refresh" id="refreshCaptchaBtn" title="Refresh Captcha">
+                <i class="fa-solid fa-rotate"></i>
+              </button>
+              <input type="text" id="captchaInput" placeholder="Enter CAPTCHA" autocomplete="off" required>
+            </div>
+            <span class="error-msg" id="captchaError">Incorrect CAPTCHA, please try again.</span>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="submitBtn" class="btn btn-primary btn-submit" disabled>
+            <span>Sign In</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <!-- Additional Links -->
+          <div class="form-footer-links">
+            <a href="#" class="forgot-pass-link">Forgot Password?</a>
+            <span>Need Help? <a href="#">Contact Support</a></span>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Custom JS -->
+  <script src="index.js"></script>
+</body>
+</html>
