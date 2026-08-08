@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="IEI Tripura State Centre - Admin Panel">
+  <title>IEI Tripura Admin Panel</title>
+  
+  <!-- Google Fonts: Inter for UI/Body, Outfit for Headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6.4.0 CDN for modern icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Admin CSS -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <h2 class="sidebar-title">IEI Tripura</h2>
+        <span class="sidebar-subtitle">Admin Panel</span>
+      </div>
+      
+      <nav class="sidebar-menu">
+        <button class="menu-item active" data-tab="dashboard">
+          <i class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span>
+        </button>
+        <button class="menu-item" data-tab="banners">
+          <i class="fa-solid fa-images"></i> <span>Hero Banners</span>
+        </button>
+        <button class="menu-item" data-tab="news">
+          <i class="fa-solid fa-newspaper"></i> <span>News</span>
+        </button>
+        <button class="menu-item" data-tab="events">
+          <i class="fa-solid fa-calendar-days"></i> <span>Events</span>
+        </button>
+        <button class="menu-item" data-tab="members">
+          <i class="fa-solid fa-users"></i> <span>Members</span>
+        </button>
+        <button class="menu-item" data-tab="newsletters">
+          <i class="fa-solid fa-book-open"></i> <span>Newsletters</span>
+        </button>
+        <button class="menu-item" data-tab="notices">
+          <i class="fa-solid fa-scroll"></i> <span>Notices</span>
+        </button>
+        <button class="menu-item" data-tab="gallery">
+          <i class="fa-solid fa-image"></i> <span>Gallery</span>
+        </button>
+        <button class="menu-item" data-tab="statistics">
+          <i class="fa-solid fa-chart-simple"></i> <span>Statistics</span>
+        </button>
+        <button class="menu-item" data-tab="inquiries">
+          <i class="fa-solid fa-comments"></i> <span>Inquiries</span>
+        </button>
+        <button class="menu-item" data-tab="settings">
+          <i class="fa-solid fa-gear"></i> <span>Settings</span>
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="menu-item btn-logout" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      
+      <!-- Top Header -->
+      <header class="admin-header">
+        <div class="header-left">
+          <h1 class="header-page-title" id="pageTitleLabel">Admin Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <span class="admin-username">IEI Tripura Admin</span>
+          <div class="admin-avatar">I</div>
+        </div>
+      </header>
+
+      <!-- Dynamic Tab Views Container -->
+      <div class="admin-content-view">
+
+        <!-- 1. DASHBOARD VIEW -->
+        <section class="tab-view active" id="view-dashboard">
+          <div class="dashboard-overview">
+            <h2 class="view-section-title">Dashboard Overview</h2>
+            <div class="overview-grid">
+              <div class="overview-card" data-target-tab="banners">
+                <div class="card-left">
+                  <span class="stat-number-large" id="dashCountBanners">3</span>
+                  <span class="stat-label-text">Active Banners</span>
+                </div>
+                <div class="card-icon-box"><i class="fa-solid fa-images"></i></div>
+              </div>
+              <div class="overview-card" data-target-tab="news">
+                <div class="card-left">
+                  <span class="stat-number-large" id="dashCountNews">10</span>
+                  <span class="stat-label-text">News Items</span>
+                </div>
+                <div class="card-icon-box"><i class="fa-solid fa-newspaper"></i></div>
+              </div>
+              <div class="overview-card" data-target-tab="events">
+                <div class="card-left">
+                  <span class="stat-number-large" id="dashCountEvents">10</span>
+                  <span class="stat-label-text">Total Events</span>
+                </div>
+                <div class="card-icon-box"><i class="fa-solid fa-calendar-days"></i></div>
+              </div>
+              <div class="overview-card" data-target-tab="members">
+                <div class="card-left">
+                  <span class="stat-number-large" id="dashCountMembers">15</span>
+                  <span class="stat-label-text">Committee Members</span>
+                </div>
+                <div class="card-icon-box"><i class="fa-solid fa-users"></i></div>
+              </div>
+            </div>
+            
+            <div class="dashboard-activity-grid">
+              <div class="activity-card">
+                <h3>Quick Actions</h3>
+                <div class="quick-actions-list">
+                  <button class="quick-act-btn" data-action="add-banner"><i class="fa-solid fa-plus"></i> Add Banner</button>
+                  <button class="quick-act-btn" data-action="add-news"><i class="fa-solid fa-plus"></i> Add News</button>
+                  <button class="quick-act-btn" data-action="add-event"><i class="fa-solid fa-plus"></i> Add Event</button>
+                  <button class="quick-act-btn" data-action="add-member"><i class="fa-solid fa-plus"></i> Add Member</button>
+                </div>
+              </div>
+              <div class="activity-card">
+                <h3>Recent System Activity</h3>
+                <div class="activity-log">
+                  <div class="log-item">
+                    <span class="log-time">Just now</span>
+                    <span class="log-text">Database synchronized with homepage.</span>
+                  </div>
+                  <div class="log-item">
+                    <span class="log-time">5 mins ago</span>
+                    <span class="log-text">Logged in successfully from IP 192.168.1.1</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. HERO BANNERS VIEW -->
+        <section class="tab-view" id="view-banners">
+          <div class="section-header-row">
+            <h2 class="view-section-title">Hero Banners</h2>
+            <button class="btn btn-primary" id="addNewBannerBtn"><i class="fa-solid fa-plus"></i> Add Banner</button>
+          </div>
+          
+          <div class="grid-2-dashboard">
+            <!-- Left: Add Banner Form -->
+            <div class="admin-form-card">
+              <h3 class="form-title" id="bannerFormTitle">Add Banner</h3>
+              <form id="bannerForm">
+                <input type="hidden" id="bannerEditId" value="">
+                
+                <div class="form-group">
+                  <label for="bannerTitle">Title</label>
+                  <input type="text" id="bannerTitle" placeholder="Title" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="bannerSubtitle">Subtitle</label>
+                  <input type="text" id="bannerSubtitle" placeholder="Subtitle" required>
+                </div>
+                
+                <div class="form-group">
+                  <label>Banner Image</label>
+                  <div class="file-upload-container">
+                    <i class="fa-solid fa-upload"></i>
+                    <button type="button" class="upload-dummy-btn" id="bannerUploadBtn">Upload Image</button>
+                    <input type="file" id="bannerFileInput" style="display: none;" accept="image/*">
+                  </div>
+                  <input type="text" id="bannerImageUrl" placeholder="Or enter Image URL">
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="bannerBtnText">Button Text</label>
+                    <input type="text" id="bannerBtnText" placeholder="Button Text" value="Learn More">
+                  </div>
+                  <div class="form-group">
+                    <label for="bannerBtnUrl">Button URL</label>
+                    <input type="text" id="bannerBtnUrl" placeholder="Button URL" value="#">
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="bannerOrder">Sort Order</label>
+                    <input type="number" id="bannerOrder" placeholder="0" value="0">
+                  </div>
+                  <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="bannerActive" checked>
+                      <span>Active</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-navy-blue" id="bannerSubmitBtn">Create</button>
+              </form>
+            </div>
+
+            <!-- Right: Banner List -->
+            <div class="admin-list-card">
+              <div class="list-wrapper" id="bannersListContainer">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. NEWS VIEW -->
+        <section class="tab-view" id="view-news">
+          <div class="section-header-row">
+            <h2 class="view-section-title">News</h2>
+            <button class="btn btn-primary" id="addNewNewsBtn"><i class="fa-solid fa-plus"></i> Add News</button>
+          </div>
+          
+          <div class="admin-table-card">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>PDF</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="newsTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 4. EVENTS VIEW -->
+        <section class="tab-view" id="view-events">
+          <div class="section-header-row">
+            <h2 class="view-section-title">Events</h2>
+            <button class="btn btn-primary" id="addNewEventBtn"><i class="fa-solid fa-plus"></i> Add Event</button>
+          </div>
+          
+          <div class="admin-table-card">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="eventsTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 5. MEMBERS VIEW -->
+        <section class="tab-view" id="view-members">
+          <div class="section-header-row">
+            <h2 class="view-section-title">Committee Members</h2>
+            <button class="btn btn-primary" id="addNewMemberBtn"><i class="fa-solid fa-plus"></i> Add Member</button>
+          </div>
+          
+          <div class="admin-table-card">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Designation</th>
+                  <th>Department</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="membersTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 6. NEWSLETTERS VIEW -->
+        <section class="tab-view" id="view-newsletters">
+          <div class="section-header-row">
+            <h2 class="view-section-title">Newsletters</h2>
+            <button class="btn btn-primary" id="addNewNewsletterBtn"><i class="fa-solid fa-plus"></i> Add Newsletter</button>
+          </div>
+          
+          <div class="admin-table-card">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Issue</th>
+                  <th>Date</th>
+                  <th>PDF</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="newslettersTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 7. NOTICES VIEW (PLACEHOLDER) -->
+        <section class="tab-view" id="view-notices">
+          <div class="section-header-row">
+            <h2 class="view-section-title">Notices</h2>
+            <button class="btn btn-primary" onclick="alert('Demo: Notice created')"><i class="fa-solid fa-plus"></i> Add Notice</button>
+          </div>
+          <div class="admin-table-card">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Important Notice regarding Membership Fees Revision</td>
+                  <td>01 Jul 2026</td>
+                  <td><span class="status-pill published">Active</span></td>
+                  <td>
+                    <button class="action-btn edit-btn" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="action-btn delete-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 8. GALLERY VIEW -->
+        <section class="tab-view" id="view-gallery">
+          <div class="section-header-row">
+            <h2 class="view-section-title" id="galleryCountTitle">Gallery (143 images)</h2>
+            <button class="btn btn-primary" id="addNewImageBtn"><i class="fa-solid fa-plus"></i> Add Image</button>
+          </div>
+          
+          <div class="gallery-filter-bar" id="galleryFilterTabs">
+            <!-- Dynamically populated filters -->
+          </div>
+          
+          <div class="gallery-admin-grid" id="galleryAdminGrid">
+            <!-- Dynamically populated images -->
+          </div>
+        </section>
+
+        <!-- 9. STATISTICS VIEW -->
+        <section class="tab-view" id="view-statistics">
+          <div class="section-header-row">
+            <h2 class="view-section-title">Statistics / Counters</h2>
+            <button class="btn btn-primary" id="addNewStatBtn"><i class="fa-solid fa-plus"></i> Add Statistic</button>
+          </div>
+          
+          <div class="admin-table-card">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Label</th>
+                  <th>Value</th>
+                  <th>Suffix</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="statisticsTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 10. INQUIRIES VIEW (PLACEHOLDER) -->
+        <section class="tab-view" id="view-inquiries">
+          <div class="section-header-row">
+            <h2 class="view-section-title">Inquiries</h2>
+          </div>
+          <div class="admin-table-card">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Sender</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Amit Deb</td>
+                  <td>amit.deb@gmail.com</td>
+                  <td>Query regarding Corporate Membership eligibility</td>
+                  <td>07 Aug 2026</td>
+                  <td>
+                    <button class="action-btn edit-btn" style="background-color: var(--primary); color: white;" title="View Details"><i class="fa-solid fa-envelope-open"></i></button>
+                    <button class="action-btn delete-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 11. SETTINGS VIEW (PLACEHOLDER) -->
+        <section class="tab-view" id="view-settings">
+          <div class="section-header-row">
+            <h2 class="view-section-title">Settings</h2>
+          </div>
+          <div class="admin-form-card" style="max-width: 600px;">
+            <h3 class="form-title">Portal Settings</h3>
+            <form onsubmit="event.preventDefault(); alert('Settings saved successfully!')">
+              <div class="form-group">
+                <label>Centre Name</label>
+                <input type="text" value="Tripura State Centre" required>
+              </div>
+              <div class="form-group">
+                <label>Contact Email</label>
+                <input type="email" value="ieitripura@gmail.com" required>
+              </div>
+              <div class="form-group">
+                <label>Admin Password</label>
+                <input type="password" value="••••••••••••" placeholder="Enter new password to change">
+              </div>
+              <button class="btn btn-navy-blue" type="submit">Save Settings</button>
+            </form>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="admin-footer-bar">
+        <span>&copy; 2026 IEI Tripura. All rights reserved.</span>
+        <span>Crafted by Tanudeep Ganguly</span>
+      </footer>
+    </main>
+
+  </div>
+
+  <!-- General CRUD Modal popup for Adding items (News, Events, Members, Newsletters, Gallery, Stats) -->
+  <div id="crudModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4 class="modal-header-logo" id="crudModalTitle">Add Item</h4>
+        <button id="closeCrudModalBtn" class="close-btn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="crudForm" novalidate>
+          <input type="hidden" id="crudItemType" value="">
+          <input type="hidden" id="crudEditId" value="">
+          
+          <!-- Dynamic form fields populated by JS -->
+          <div id="modalFormFields"></div>
+          
+          <button type="submit" class="btn btn-primary btn-submit" style="width:100%; margin-top:1.5rem;" id="crudSubmitBtn">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

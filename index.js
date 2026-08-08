@@ -1,6 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- Multi-Language Toggle Simulation ---
+  // --- 1. LOCAL STORAGE STATE SYNCHRONIZATION ---
+  const defaultBanners = [
+    { id: 1, title: "IEI building", subtitle: "Tripura State Centre Headquarters", image: "assets/iei_building.png", btnText: "View Facilities", btnUrl: "#", active: true, order: 1 },
+    { id: 2, title: "The Institution of Engineers (India)", subtitle: "Tripura State Centre - A Century of Service to the Nation", image: "assets/seminar_hero.png", btnText: "Learn More", btnUrl: "#", active: true, order: 2 },
+    { id: 3, title: "Technical Innovation & Professional Growth", subtitle: "Serving the Engineering Community", image: "assets/meeting1.png", btnText: "Read More", btnUrl: "#", active: true, order: 3 }
+  ];
+
+  const defaultEvents = [
+    { id: 1, title: "Workshop on Green Building Technologies", date: "2026-09-05", type: "workshop" },
+    { id: 2, title: "National Conference on Engineering Innovations", date: "2026-08-15", type: "seminar" },
+    { id: 3, title: "Webinar on Smart Metering and Net Metering", date: "2026-07-17", type: "webinar" },
+    { id: 4, title: "IEI Technical Webinar on ChatGPT- Opportunity and Challenges in Current Era", date: "2023-05-12", type: "webinar" },
+    { id: 5, title: "Technical Meet in Industrial Sector and Seminar on Clean & Green Energy in Industrial Sector", date: "2023-05-04", type: "seminar" },
+    { id: 6, title: "IEI Technical Webinar on \"5G and its applications\" on 29th April, 2023", date: "2023-04-21", type: "webinar" },
+    { id: 7, title: "IEI Technical Webinar on \"Challenges and Opportunities of Sustainability in Production\"", date: "2023-03-27", type: "webinar" },
+    { id: 8, title: "One Day Seminar on \"Recent Trends in Energy Conversion Technologies and Its Applications\"", date: "2023-03-14", type: "seminar" },
+    { id: 9, title: "IEI Technical Webinar on \"Earthquake, A Decade long Mega-Disastrous Event: Lessons Learnt\"", date: "2023-03-09", type: "webinar" },
+    { id: 10, title: "IEI Technical Webinar on \"Renewable Energy: Opportunities, Key Challenges and Potential\"", date: "2023-02-17", type: "webinar" }
+  ];
+
+  const defaultStatistics = [
+    { id: 1, label: "Members", value: 5000, suffix: "+", status: "Active" },
+    { id: 2, label: "Events Organized", value: 200, suffix: "+", status: "Active" },
+    { id: 3, label: "Years of Excellence", value: 106, suffix: "+", status: "Active" },
+    { id: 4, label: "Engineering Divisions", value: 15, suffix: "-", status: "Active" },
+    { id: 5, label: "Years of Service", value: 50, suffix: "+", status: "Active" },
+    { id: 6, label: "Engineering Disciplines", value: 15, suffix: "-", status: "Active" },
+    { id: 7, label: "State Centres", value: 125, suffix: "+", status: "Active" },
+    { id: 8, label: "Student Chapters", value: 500, suffix: "+", status: "Active" },
+    { id: 9, label: "Overseas Chapters", value: 6, suffix: "-", status: "Active" }
+  ];
+
+  const defaultNewsletters = [
+    { id: 1, title: "IEI Tripura Newsletter - April 2026", issue: "Vol. 5, Issue 4", date: "08 Jul 2026", pdf: true, status: "Published" },
+    { id: 2, title: "IEI Tripura Newsletter - May 2026", issue: "Vol. 5, Issue 5", date: "08 Jul 2026", pdf: true, status: "Published" },
+    { id: 3, title: "IEI, TSC Newsletter__October, 2022", issue: "IEI, TSC Newsletter__October, 2022", date: "08 Jul 2026", pdf: true, status: "Published" }
+  ];
+
+  // Retrieve states
+  const activeBanners = (JSON.parse(localStorage.getItem('ieiBanners')) || defaultBanners).filter(b => b.active);
+  const eventsList = JSON.parse(localStorage.getItem('ieiEvents')) || defaultEvents;
+  const statsList = (JSON.parse(localStorage.getItem('ieiStatistics')) || defaultStatistics).filter(s => s.status === 'Active');
+  const newsletterList = (JSON.parse(localStorage.getItem('ieiNewsletters')) || defaultNewsletters).filter(n => n.status === 'Published');
+
+
+  // --- 2. MULTI-LANGUAGE TOGGLE ---
   const langBtns = document.querySelectorAll('.lang-btn');
   langBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -11,157 +56,116 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Dropdown Menu Accessibility/Interactivity ---
-  const dropdowns = document.querySelectorAll('.dropdown');
-  dropdowns.forEach(dd => {
-    const link = dd.querySelector('.nav-link');
-    link.addEventListener('click', (e) => {
-      if (window.innerWidth <= 1024) {
-        e.preventDefault();
-        dd.classList.toggle('active-mobile');
-      }
-    });
-  });
-
-  // --- Modal Open/Close Controls ---
-  const loginModal = document.getElementById('loginModal');
-  const openLoginBtn = document.getElementById('openLoginBtn');
-  const closeLoginBtn = document.getElementById('closeLoginBtn');
-
-  const openModal = () => {
-    loginModal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    generateCaptcha(); // Generate a new captcha each time modal opens
-    resetForm();
-  };
-
-  const closeModal = () => {
-    loginModal.classList.remove('active');
-    document.body.style.overflow = '';
-  };
-
-  if (openLoginBtn) openLoginBtn.addEventListener('click', openModal);
-  if (closeLoginBtn) closeLoginBtn.addEventListener('click', closeModal);
-
-  // Close modal when clicking on the overlay background
-  loginModal.addEventListener('click', (e) => {
-    if (e.target === loginModal) {
-      closeModal();
-    }
-  });
-
-  // Close modal on Escape key press
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && loginModal.classList.contains('active')) {
-      closeModal();
-    }
-  });
-
-  // --- Password Show/Hide Toggle ---
-  const passwordInput = document.getElementById('password');
-  const togglePasswordBtn = document.getElementById('togglePasswordBtn');
-  const toggleIcon = togglePasswordBtn ? togglePasswordBtn.querySelector('i') : null;
-
-  if (togglePasswordBtn && passwordInput) {
-    togglePasswordBtn.addEventListener('click', () => {
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleIcon.className = 'fa-solid fa-eye-slash';
-      } else {
-        passwordInput.type = 'password';
-        toggleIcon.className = 'fa-solid fa-eye';
-      }
-    });
-  }
-
-  // --- Alphanumeric Captcha Generation & Verification ---
-  const captchaBox = document.getElementById('captchaBox');
-  const refreshCaptchaBtn = document.getElementById('refreshCaptchaBtn');
-  const captchaInput = document.getElementById('captchaInput');
-  const captchaError = document.getElementById('captchaError');
-  let currentCaptcha = '';
-
-  const generateCaptcha = () => {
-    if (!captchaBox) return;
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let captcha = '';
-    for (let i = 0; i < 5; i++) {
-      captcha += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    currentCaptcha = captcha;
-    captchaBox.innerText = captcha;
-    if (captchaInput) captchaInput.value = '';
-    if (captchaError) captchaError.style.display = 'none';
-    validateForm();
-  };
-
-  if (refreshCaptchaBtn) refreshCaptchaBtn.addEventListener('click', generateCaptcha);
-
-  // --- Hero Slider Logic ---
-  const slides = document.querySelectorAll('.slide');
-  const widgets = document.querySelectorAll('.highlight-widget');
-  const dots = document.querySelectorAll('.indicator-dot');
-  const prevBtn = document.getElementById('sliderPrev');
-  const nextBtn = document.getElementById('sliderNext');
-  const sliderSection = document.querySelector('.hero-slider-section');
+  // --- 3. DYNAMIC HERO SLIDER CAROUSEL ---
+  const heroSlider = document.getElementById('heroSlider');
+  const sliderHighlightsSidebar = document.querySelector('.slider-highlights-sidebar');
+  const sliderIndicators = document.getElementById('sliderIndicators');
   let currentSlide = 0;
   let slideInterval;
 
+  const renderHomeSlider = () => {
+    if (!heroSlider) return;
+    
+    // Clear static templates
+    heroSlider.innerHTML = '';
+    if (sliderHighlightsSidebar) sliderHighlightsSidebar.innerHTML = '';
+    if (sliderIndicators) sliderIndicators.innerHTML = '';
+
+    if (activeBanners.length === 0) {
+      heroSlider.innerHTML = `<div class="slide active"><div class="slide-background" style="background-color:#061d3f;"></div><div class="slide-content-container"><h3 class="slide-org-title">The Institution of Engineers</h3></div></div>`;
+      return;
+    }
+
+    activeBanners.forEach((banner, i) => {
+      // 1. Create Slide
+      const slide = document.createElement('div');
+      slide.className = `slide ${i === 0 ? 'active' : ''}`;
+      
+      // Separate seminar slide styling if title is specific
+      const isSeminar = banner.title.toLowerCase().includes('seminar') || banner.title.toLowerCase().includes('institution of engineers');
+      
+      slide.innerHTML = `
+        <div class="slide-background" style="background-image: url('${banner.image || 'assets/logo.jpg'}');"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-content-container">
+          <div class="slide-info-left">
+            <span class="slide-tag">EST. 1920</span>
+            <h3 class="slide-org-title">${isSeminar ? 'The Institution of Engineers (India)' : banner.title}</h3>
+            <p class="slide-org-subtitle">${isSeminar ? 'Tripura State Centre - A Century of Service to the Nation' : banner.subtitle}</p>
+            
+            <div class="slide-seminar-box">
+              <div class="seminar-divider"></div>
+              <h4 class="seminar-title">${isSeminar ? banner.title : banner.subtitle}</h4>
+              <p class="seminar-author">Organised By The Institution of Engineers (India), Tripura State Centre</p>
+              <div class="seminar-meta">
+                <span class="meta-item"><i class="fa-solid fa-calendar-days"></i> 20th August, 2025</span>
+                <span class="meta-item"><i class="fa-solid fa-location-dot"></i> VENUE: Seminar Hall, Agartala</span>
+              </div>
+            </div>
+            
+            <button class="btn btn-gold learn-more-btn" onclick="window.location.href='${banner.btnUrl}'">
+              <span>${banner.btnText || 'Learn More'}</span> <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      heroSlider.appendChild(slide);
+
+      // 2. Create Highlights Sidebar item
+      if (sliderHighlightsSidebar) {
+        const widget = document.createElement('div');
+        widget.className = `highlight-widget ${i === 0 ? 'active' : ''}`;
+        widget.setAttribute('data-slide', i);
+        widget.innerHTML = `
+          <span class="widget-tag">${i === 0 ? 'UP NEXT' : 'PREVIOUS'}</span>
+          <h4 class="widget-title">${banner.title}</h4>
+        `;
+        widget.addEventListener('click', () => {
+          showSlide(i);
+          resetAutoplay();
+        });
+        sliderHighlightsSidebar.appendChild(widget);
+      }
+
+      // 3. Create Indicators Dot
+      if (sliderIndicators) {
+        const dot = document.createElement('span');
+        dot.className = `indicator-dot ${i === 0 ? 'active' : ''}`;
+        dot.setAttribute('data-slide', i);
+        dot.addEventListener('click', () => {
+          showSlide(i);
+          resetAutoplay();
+        });
+        sliderIndicators.appendChild(dot);
+      }
+    });
+  };
+
   const showSlide = (index) => {
+    const slides = document.querySelectorAll('.slide');
+    const widgets = document.querySelectorAll('.highlight-widget');
+    const dots = document.querySelectorAll('.indicator-dot');
+
     if (slides.length === 0) return;
     
-    // Normalize index
     if (index >= slides.length) currentSlide = 0;
     else if (index < 0) currentSlide = slides.length - 1;
     else currentSlide = index;
 
-    // Update active slide class
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === currentSlide);
-    });
-
-    // Update highlights sidebar widgets
-    widgets.forEach((widget, i) => {
-      widget.classList.toggle('active', i === currentSlide);
-    });
-
-    // Update indicators dots
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentSlide);
-    });
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
+    widgets.forEach((widget, i) => widget.classList.toggle('active', i === currentSlide));
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
   };
 
-  const nextSlide = () => {
-    showSlide(currentSlide + 1);
-  };
+  const nextSlide = () => showSlide(currentSlide + 1);
+  const prevSlide = () => showSlide(currentSlide - 1);
 
-  const prevSlide = () => {
-    showSlide(currentSlide - 1);
-  };
-
-  // Slider buttons listeners
+  // Bind Slider arrows
+  const prevBtn = document.getElementById('sliderPrev');
+  const nextBtn = document.getElementById('sliderNext');
   if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
   if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
 
-  // Sidebar highlights widgets click
-  widgets.forEach(widget => {
-    widget.addEventListener('click', () => {
-      const targetIndex = parseInt(widget.getAttribute('data-slide'));
-      showSlide(targetIndex);
-      resetAutoplay();
-    });
-  });
-
-  // Dots click
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const targetIndex = parseInt(dot.getAttribute('data-slide'));
-      showSlide(targetIndex);
-      resetAutoplay();
-    });
-  });
-
-  // Autoplay function
   const startAutoplay = () => {
     slideInterval = setInterval(nextSlide, 6000);
   };
@@ -171,44 +175,101 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoplay();
   };
 
-  // Pause on hover
+  const sliderSection = document.querySelector('.hero-slider-section');
   if (sliderSection) {
     sliderSection.addEventListener('mouseenter', () => clearInterval(slideInterval));
     sliderSection.addEventListener('mouseleave', startAutoplay);
   }
 
-  // Start slideshow autoplay
+  // Render and start carousel autoplay
+  renderHomeSlider();
   startAutoplay();
 
 
-  // --- Events Calendar Database & Render Logic ---
-  const eventsData = {
-    "2026-07": [
-      { day: 10, title: "Special General Body Meeting", time: "02:00 PM", venue: "Seminar Hall, Agartala" },
-      { day: 22, title: "Workshop on AutoCAD in Civil Engineering", time: "11:00 AM", venue: "Computer Lab" }
-    ],
-    "2026-08": [
-      { day: 8, title: "IEI Foundation Day Celebrations", time: "10:30 AM", venue: "Main Auditorium, Agartala" },
-      { day: 15, title: "Independence Day Flag Hoisting & Special Speech", time: "08:00 AM", venue: "IEI Premises" },
-      { day: 20, title: "Seminar: How to develop the existing Small Industrial scenario in Tripura", time: "10:00 AM", venue: "Seminar Hall, Agartala" },
-      { day: 28, title: "Technical Lecture on Smart Grid & Microgrid Systems", time: "03:00 PM", venue: "Seminar Hall" }
-    ],
-    "2026-09": [
-      { day: 15, title: "59th Engineers' Day National Seminar & Awards", time: "09:30 AM", venue: "Conference Hall, Agartala" },
-      { day: 25, title: "All Tripura Quiz Competition for Students", time: "02:00 PM", venue: "Main Exhibition Hall" }
-    ]
-  };
+  // --- 4. DYNAMIC ABOUT US STATS CARD ---
+  const homeStatsGrid = document.querySelector('.stats-grid');
+  const renderHomeStats = () => {
+    if (!homeStatsGrid) return;
+    homeStatsGrid.innerHTML = '';
+    
+    // Icon map for stats
+    const iconMap = {
+      "members": "fa-users",
+      "centres": "fa-globe",
+      "established": "fa-calendar-check",
+      "disciplines": "fa-book"
+    };
 
+    // Grab top 4 stats
+    const displayStats = statsList.slice(0, 4);
+    
+    displayStats.forEach(stat => {
+      let iconClass = "fa-chart-pie";
+      const key = stat.label.toLowerCase();
+      if (key.includes('member')) iconClass = iconMap.members;
+      else if (key.includes('centre')) iconClass = iconMap.centres;
+      else if (key.includes('established') || key.includes('excellence')) iconClass = iconMap.established;
+      else if (key.includes('discipline') || key.includes('division')) iconClass = iconMap.disciplines;
+
+      const item = document.createElement('div');
+      item.className = 'stat-item';
+      item.innerHTML = `
+        <div class="stat-icon"><i class="fa-solid ${iconClass}"></i></div>
+        <div class="stat-number">${stat.value}${stat.suffix !== '-' ? stat.suffix : ''}</div>
+        <div class="stat-label">${stat.label.toUpperCase()}</div>
+      `;
+      homeStatsGrid.appendChild(item);
+    });
+  };
+  
+  renderHomeStats();
+
+  // Bind Stats actions
+  const statsTabBtns = document.querySelectorAll('.stats-action-btn');
+  statsTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.getAttribute('data-type');
+      showToast(`Viewing lists for all IEI Tripura ${type.charAt(0).toUpperCase() + type.slice(1)}`);
+    });
+  });
+
+
+  // --- 5. DYNAMIC EVENTS CALENDAR ---
   const monthNames = [
     "January", "February", "March", "April", "May", "June", 
     "July", "August", "September", "October", "November", "December"
   ];
 
-  let currentCalDate = new Date(2026, 7, 1); // August 2026 (0-indexed 7)
+  let currentCalDate = new Date(2026, 7, 1); // August 2026
   const currentMonthLabel = document.getElementById('currentMonth');
   const currentYearLabel = document.getElementById('currentYear');
   const calendarDaysContainer = document.getElementById('calendarDays');
   const eventsListContainer = document.getElementById('eventsList');
+
+  // Convert raw list to grouping map: { "YYYY-MM": [ { day: X, title: "...", time: "...", venue: "..." } ] }
+  const parseEventsDatabase = () => {
+    const map = {};
+    eventsList.forEach(e => {
+      const parts = e.date.split('-');
+      if (parts.length === 3) {
+        const year = parts[0];
+        const month = parts[1]; // Keep pad
+        const day = parseInt(parts[2]);
+        const key = `${year}-${month}`;
+        
+        if (!map[key]) map[key] = [];
+        map[key].push({
+          day,
+          title: e.title,
+          time: e.type === 'seminar' ? '10:00 AM' : (e.type === 'webinar' ? '03:00 PM' : '11:00 AM'),
+          venue: e.type === 'webinar' ? 'Online Webinar' : 'Seminar Hall, Agartala'
+        });
+      }
+    });
+    return map;
+  };
+
+  const formattedEventsData = parseEventsDatabase();
 
   const generateCalendar = (date) => {
     if (!calendarDaysContainer) return;
@@ -221,17 +282,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     calendarDaysContainer.innerHTML = '';
 
-    // First day of current month
     const firstDayIndex = new Date(year, month, 1).getDay();
-    // Last day of current month
     const lastDay = new Date(year, month + 1, 0).getDate();
-    // Last day of prev month
     const prevLastDay = new Date(year, month, 0).getDate();
 
     const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
-    const monthlyEvents = eventsData[monthKey] || [];
+    const monthlyEvents = formattedEventsData[monthKey] || [];
 
-    // Render padding days from previous month
+    // Render padding days
     for (let x = firstDayIndex; x > 0; x--) {
       const dayCell = document.createElement('div');
       dayCell.className = 'cal-day-cell other-month';
@@ -245,28 +303,25 @@ document.addEventListener('DOMContentLoaded', () => {
       dayCell.className = 'cal-day-cell';
       dayCell.innerText = i;
 
-      // Check if this day has events
       const dayHasEvent = monthlyEvents.some(event => event.day === i);
       if (dayHasEvent) {
         dayCell.classList.add('has-event');
       }
 
-      // Add click handler
       dayCell.addEventListener('click', () => {
         document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('selected'));
         dayCell.classList.add('selected');
         renderEventsForDay(year, month, i);
       });
 
-      // Default select 20th if August 2026 to show slider event
-      if (year === 2026 && month === 7 && i === 20) {
+      // Default select the first event day if active
+      if (year === 2026 && month === 7 && i === 15) {
         dayCell.classList.add('selected');
       }
 
       calendarDaysContainer.appendChild(dayCell);
     }
 
-    // Initial render of events for the current active month
     renderEventsForMonth(year, month);
   };
 
@@ -274,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!eventsListContainer) return;
     
     const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
-    const monthlyEvents = eventsData[monthKey] || [];
+    const monthlyEvents = formattedEventsData[monthKey] || [];
 
     if (monthlyEvents.length === 0) {
       eventsListContainer.innerHTML = `<div class="no-events">No events scheduled for ${monthNames[month]} ${year}.</div>`;
@@ -292,13 +347,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!eventsListContainer) return;
 
     const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
-    const monthlyEvents = eventsData[monthKey] || [];
+    const monthlyEvents = formattedEventsData[monthKey] || [];
     const dayEvents = monthlyEvents.filter(e => e.day === day);
 
     if (dayEvents.length === 0) {
       eventsListContainer.innerHTML = `
         <div class="no-events">No events on ${day} ${monthNames[month]} ${year}.</div>
-        <button class="btn btn-primary" id="viewAllMonthEvents" style="margin-top: 1rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+        <button class="btn btn-primary" id="viewAllMonthEvents" style="margin-top: 1rem; font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius:4px;">
           View All ${monthNames[month]} Events
         </button>
       `;
@@ -330,50 +385,129 @@ document.addEventListener('DOMContentLoaded', () => {
     return card;
   };
 
-  // Calendar Controls Action Listeners
+  // Bind Calendar arrows
   const prevMonthBtn = document.getElementById('prevMonth');
   const nextMonthBtn = document.getElementById('nextMonth');
   const prevYearBtn = document.getElementById('prevYear');
   const nextYearBtn = document.getElementById('nextYear');
 
-  if (prevMonthBtn) {
-    prevMonthBtn.addEventListener('click', () => {
-      currentCalDate.setMonth(currentCalDate.getMonth() - 1);
-      generateCalendar(currentCalDate);
-    });
-  }
+  if (prevMonthBtn) prevMonthBtn.addEventListener('click', () => { currentCalDate.setMonth(currentCalDate.getMonth() - 1); generateCalendar(currentCalDate); });
+  if (nextMonthBtn) nextMonthBtn.addEventListener('click', () => { currentCalDate.setMonth(currentCalDate.getMonth() + 1); generateCalendar(currentCalDate); });
+  if (prevYearBtn) prevYearBtn.addEventListener('click', () => { currentCalDate.setFullYear(currentCalDate.getFullYear() - 1); generateCalendar(currentCalDate); });
+  if (nextYearBtn) nextYearBtn.addEventListener('click', () => { currentCalDate.setFullYear(currentCalDate.getFullYear() + 1); generateCalendar(currentCalDate); });
 
-  if (nextMonthBtn) {
-    nextMonthBtn.addEventListener('click', () => {
-      currentCalDate.setMonth(currentCalDate.getMonth() + 1);
-      generateCalendar(currentCalDate);
-    });
-  }
-
-  if (prevYearBtn) {
-    prevYearBtn.addEventListener('click', () => {
-      currentCalDate.setFullYear(currentCalDate.getFullYear() - 1);
-      generateCalendar(currentCalDate);
-    });
-  }
-
-  if (nextYearBtn) {
-    nextYearBtn.addEventListener('click', () => {
-      currentCalDate.setFullYear(currentCalDate.getFullYear() + 1);
-      generateCalendar(currentCalDate);
-    });
-  }
-
-  // Populate calendar on load
   generateCalendar(currentCalDate);
 
 
-  // --- Form Validation Checklists & State Control ---
+  // --- 6. DYNAMIC NEWSLETTER BAR ---
+  const renderHomeNewsletter = () => {
+    const bar = document.querySelector('.newsletter-bar-gradient');
+    if (!bar) return;
+
+    if (newsletterList.length === 0) {
+      bar.style.display = 'none';
+      return;
+    }
+
+    // Grab latest newsletter (first in array)
+    const latest = newsletterList[0];
+    
+    // Update contents
+    const volumeTag = bar.querySelector('.newsletter-volume-tag');
+    const heading = bar.querySelector('.newsletter-title-heading');
+    const desc = bar.querySelector('.newsletter-description-text');
+
+    if (volumeTag) volumeTag.innerText = latest.issue;
+    if (heading) heading.innerText = latest.title;
+    if (desc) desc.innerText = `Published on ${latest.date}. Available for download in secure PDF format.`;
+
+    const dlBtn = document.getElementById('downloadNewsletterBtn');
+    if (dlBtn) {
+      dlBtn.replaceWith(dlBtn.cloneNode(true)); // remove old listeners
+      document.getElementById('downloadNewsletterBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showToast(`Downloading Newsletter: ${latest.title.replace(/\s+/g, '_')}.pdf`);
+      });
+    }
+  };
+
+  renderHomeNewsletter();
+
+
+  // --- 7. SECURE SIGN IN MODAL & REDIRECTS ---
+  const loginModal = document.getElementById('loginModal');
+  const openLoginBtn = document.getElementById('openLoginBtn');
+  const closeLoginBtn = document.getElementById('closeLoginBtn');
+
+  const openModal = () => {
+    loginModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    generateCaptcha();
+    resetForm();
+  };
+
+  const closeModal = () => {
+    loginModal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  if (openLoginBtn) openLoginBtn.addEventListener('click', openModal);
+  if (closeLoginBtn) closeLoginBtn.addEventListener('click', closeModal);
+
+  if (loginModal) {
+    loginModal.addEventListener('click', (e) => {
+      if (e.target === loginModal) closeModal();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && loginModal && loginModal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  const passwordInput = document.getElementById('password');
+  const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+  const toggleIcon = togglePasswordBtn ? togglePasswordBtn.querySelector('i') : null;
+
+  if (togglePasswordBtn && passwordInput) {
+    togglePasswordBtn.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.className = 'fa-solid fa-eye-slash';
+      } else {
+        passwordInput.type = 'password';
+        toggleIcon.className = 'fa-solid fa-eye';
+      }
+    });
+  }
+
+  const captchaBox = document.getElementById('captchaBox');
+  const refreshCaptchaBtn = document.getElementById('refreshCaptchaBtn');
+  const captchaInput = document.getElementById('captchaInput');
+  const captchaError = document.getElementById('captchaError');
+  let currentCaptcha = '';
+
+  const generateCaptcha = () => {
+    if (!captchaBox) return;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let captcha = '';
+    for (let i = 0; i < 5; i++) {
+      captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    currentCaptcha = captcha;
+    captchaBox.innerText = captcha;
+    if (captchaInput) captchaInput.value = '';
+    if (captchaError) captchaError.style.display = 'none';
+    validateForm();
+  };
+
+  if (refreshCaptchaBtn) refreshCaptchaBtn.addEventListener('click', generateCaptcha);
+
   const loginForm = document.getElementById('loginForm');
   const usernameInput = document.getElementById('username');
   const submitBtn = document.getElementById('submitBtn');
 
-  // Input wrapper status icons
   const userWrapper = usernameInput ? usernameInput.closest('.input-wrapper') : null;
   const userSuccessIcon = userWrapper ? userWrapper.querySelector('.status-icon.success') : null;
   const userErrorIcon = userWrapper ? userWrapper.querySelector('.status-icon.error') : null;
@@ -382,27 +516,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const passSuccessIcon = passWrapper ? passWrapper.querySelector('.status-icon.success') : null;
   const passErrorIcon = passWrapper ? passWrapper.querySelector('.status-icon.error') : null;
 
-  // Checklists
   const usernameChecklist = document.getElementById('usernameChecklist');
   const passwordChecklist = document.getElementById('passwordChecklist');
 
-  // Validation States
   let isUsernameValid = false;
   let isPasswordValid = false;
 
   if (usernameInput) {
-    // Show checklists on focus
-    usernameInput.addEventListener('focus', () => {
-      usernameChecklist.classList.add('active');
-    });
-
-    // Hide checklist on blur only if the field is valid or empty
+    usernameInput.addEventListener('focus', () => usernameChecklist.classList.add('active'));
     usernameInput.addEventListener('blur', () => {
       if (usernameInput.value.length === 0 || isUsernameValid) {
         usernameChecklist.classList.remove('active');
       }
     });
-
     usernameInput.addEventListener('input', () => {
       validateUsername();
       validateForm();
@@ -410,16 +536,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (passwordInput) {
-    passwordInput.addEventListener('focus', () => {
-      passwordChecklist.classList.add('active');
-    });
-
+    passwordInput.addEventListener('focus', () => passwordChecklist.classList.add('active'));
     passwordInput.addEventListener('blur', () => {
       if (passwordInput.value.length === 0 || isPasswordValid) {
         passwordChecklist.classList.remove('active');
       }
     });
-
     passwordInput.addEventListener('input', () => {
       validatePassword();
       validateForm();
@@ -433,19 +555,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Radio button role changes
   document.querySelectorAll('input[name="role"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      validateForm();
-    });
+    radio.addEventListener('change', () => validateForm());
   });
 
-  // --- Validation Helper Functions ---
   const validateUsername = () => {
     if (!usernameInput) return;
     const val = usernameInput.value;
-    
-    // If empty, clean state
     if (val.length === 0) {
       isUsernameValid = false;
       if (userSuccessIcon) userSuccessIcon.style.display = 'none';
@@ -453,18 +569,14 @@ document.addEventListener('DOMContentLoaded', () => {
       resetChecklistItems(usernameChecklist);
       return;
     }
-
     const rules = {
       length: val.length >= 8 && val.length <= 15,
       uppercase: /[A-Z]/.test(val),
       special: /[\W_]/.test(val),
       nospaces: !/\s/.test(val)
     };
-
     updateChecklistUI(usernameChecklist, rules);
-
-    isUsernameValid = Object.values(rules).every(rule => rule === true);
-
+    isUsernameValid = Object.values(rules).every(r => r === true);
     if (isUsernameValid) {
       if (userSuccessIcon) userSuccessIcon.style.display = 'block';
       if (userErrorIcon) userErrorIcon.style.display = 'none';
@@ -479,8 +591,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const validatePassword = () => {
     if (!passwordInput) return;
     const val = passwordInput.value;
-
-    // If empty, clean state
     if (val.length === 0) {
       isPasswordValid = false;
       if (passSuccessIcon) passSuccessIcon.style.display = 'none';
@@ -488,7 +598,6 @@ document.addEventListener('DOMContentLoaded', () => {
       resetChecklistItems(passwordChecklist);
       return;
     }
-
     const rules = {
       length: val.length >= 8 && val.length <= 15,
       uppercase: /[A-Z]/.test(val),
@@ -497,11 +606,8 @@ document.addEventListener('DOMContentLoaded', () => {
       special: /[\W_]/.test(val),
       nospaces: !/\s/.test(val)
     };
-
     updateChecklistUI(passwordChecklist, rules);
-
-    isPasswordValid = Object.values(rules).every(rule => rule === true);
-
+    isPasswordValid = Object.values(rules).every(r => r === true);
     if (isPasswordValid) {
       if (passSuccessIcon) passSuccessIcon.style.display = 'block';
       if (passErrorIcon) passErrorIcon.style.display = 'none';
@@ -517,42 +623,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!checklistElement) return;
     for (const [ruleName, isMet] of Object.entries(rules)) {
       const item = checklistElement.querySelector(`[data-rule="${ruleName}"]`);
-      if (item) {
-        if (isMet) {
-          item.className = 'check-item valid';
-        } else {
-          item.className = 'check-item invalid';
-        }
-      }
+      if (item) item.className = `check-item ${isMet ? 'valid' : 'invalid'}`;
     }
   };
 
   const resetChecklistItems = (checklistElement) => {
     if (!checklistElement) return;
-    checklistElement.querySelectorAll('.check-item').forEach(item => {
-      item.className = 'check-item';
-    });
+    checklistElement.querySelectorAll('.check-item').forEach(item => item.className = 'check-item');
   };
 
-  // Enable button only if Role selected, Username valid, Password valid, and Captcha input entered
   const validateForm = () => {
     if (!submitBtn) return;
     const selectedRole = document.querySelector('input[name="role"]:checked');
     const hasRole = selectedRole !== null;
     const hasCaptchaInput = captchaInput ? captchaInput.value.trim().length > 0 : false;
-
-    const isValid = hasRole && isUsernameValid && isPasswordValid && hasCaptchaInput;
-    submitBtn.disabled = !isValid;
+    submitBtn.disabled = !(hasRole && isUsernameValid && isPasswordValid && hasCaptchaInput);
   };
 
-  // Reset form status on modal open
   const resetForm = () => {
     if (!loginForm) return;
     loginForm.reset();
     isUsernameValid = false;
     isPasswordValid = false;
-    
-    // Clear icons & border styles
     if (userSuccessIcon) userSuccessIcon.style.display = 'none';
     if (userErrorIcon) userErrorIcon.style.display = 'none';
     if (usernameInput) {
@@ -560,7 +652,6 @@ document.addEventListener('DOMContentLoaded', () => {
       usernameChecklist.classList.remove('active');
     }
     resetChecklistItems(usernameChecklist);
-
     if (passSuccessIcon) passSuccessIcon.style.display = 'none';
     if (passErrorIcon) passErrorIcon.style.display = 'none';
     if (passwordInput) {
@@ -572,80 +663,61 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     resetChecklistItems(passwordChecklist);
-    
     if (captchaError) captchaError.style.display = 'none';
-    if (submitBtn) submitBtn.disabled = true;
+    submitBtn.disabled = true;
   };
 
-  // Form Submit and Captcha Validation
   if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
       const enteredCaptcha = captchaInput.value.trim();
       if (enteredCaptcha !== currentCaptcha) {
         captchaError.style.display = 'block';
         captchaInput.value = '';
-        validateForm(); // Disable submit again
+        validateForm();
         return;
       }
-
-      // Success login mock
+      
       const selectedRole = document.querySelector('input[name="role"]:checked').value;
-      const roleDisplayName = selectedRole.replace('_', ' ').toUpperCase();
-      alert(`Successfully signed in to IEI Portal as ${roleDisplayName}!\n\nUser/Member ID: ${usernameInput.value}`);
-      closeModal();
+      
+      if (selectedRole === 'admin') {
+        closeModal();
+        showToast("Access Granted: Redirecting to Admin Dashboard...");
+        setTimeout(() => {
+          window.location.href = 'admin.html';
+        }, 1200);
+      } else {
+        const roleDisplayName = selectedRole.replace('_', ' ').toUpperCase();
+        alert(`Successfully signed in to IEI Portal as ${roleDisplayName}!\n\nUser/Member ID: ${usernameInput.value}`);
+        closeModal();
+      }
     });
   }
 
 
-  // --- Stats tab button click actions ---
-  const statsTabBtns = document.querySelectorAll('.stats-action-btn');
-  statsTabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const type = btn.getAttribute('data-type');
-      showToast(`Viewing lists for all IEI Tripura ${type.charAt(0).toUpperCase() + type.slice(1)}`);
-    });
-  });
-
-  // --- Newsletter Download Action ---
-  const downloadBtn = document.getElementById('downloadNewsletterBtn');
-  if (downloadBtn) {
-    downloadBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      showToast("Downloading Newsletter: IEI_Tripura_Newsletter_April_2026.pdf (1.2 MB)");
-    });
-  }
-
-  // --- Header Search Action ---
+  // --- 8. GENERAL HEADER ACTIONS & TOASTS ---
   const searchBtn = document.getElementById('searchBtn');
   if (searchBtn) {
     searchBtn.addEventListener('click', () => {
-      const searchQuery = prompt("Search IEI Tripura Portal:");
-      if (searchQuery) {
-        showToast(`Searching database for: "${searchQuery}"`);
-      }
+      const q = prompt("Search IEI Tripura Portal:");
+      if (q) showToast(`Searching database for: "${q}"`);
     });
   }
 
-
-  // --- Toast/Notification Alert helper ---
   const showToast = (message) => {
-    // Create toast container if it doesn't exist
-    let toastContainer = document.getElementById('toastContainer');
-    if (!toastContainer) {
-      toastContainer = document.createElement('div');
-      toastContainer.id = 'toastContainer';
-      toastContainer.style.position = 'fixed';
-      toastContainer.style.bottom = '2rem';
-      toastContainer.style.right = '2rem';
-      toastContainer.style.zIndex = '9999';
-      toastContainer.style.display = 'flex';
-      toastContainer.style.flexDirection = 'column';
-      toastContainer.style.gap = '0.5rem';
-      document.body.appendChild(toastContainer);
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.style.position = 'fixed';
+      container.style.bottom = '2rem';
+      container.style.right = '2rem';
+      container.style.zIndex = '9999';
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column';
+      container.style.gap = '0.5rem';
+      document.body.appendChild(container);
     }
-
     const toast = document.createElement('div');
     toast.style.backgroundColor = 'var(--primary)';
     toast.style.color = 'var(--white)';
@@ -659,24 +731,15 @@ document.addEventListener('DOMContentLoaded', () => {
     toast.style.opacity = '0';
     toast.style.transform = 'translateY(20px)';
     toast.style.transition = 'all 0.3s ease';
-
     toast.innerText = message;
-    toastContainer.appendChild(toast);
-
-    // Trigger reflow
+    container.appendChild(toast);
     toast.offsetHeight;
-
-    // Show toast
     toast.style.opacity = '1';
     toast.style.transform = 'translateY(0)';
-
-    // Remove toast after 3.5 seconds
     setTimeout(() => {
       toast.style.opacity = '0';
       toast.style.transform = 'translateY(-20px)';
-      setTimeout(() => {
-        toast.remove();
-      }, 300);
+      setTimeout(() => toast.remove(), 300);
     }, 3500);
   };
 

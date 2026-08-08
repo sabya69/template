@@ -252,8 +252,23 @@ button, input, select {
   gap: 0.75rem;
 }
 
-.iei-logo-svg {
+.iei-logo-svg, .iei-logo-img {
   flex-shrink: 0;
+}
+
+.iei-logo-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background-color: var(--white);
+}
+
+.footer-logo-row .iei-logo-img {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .brand-text {
@@ -396,8 +411,7 @@ button, input, select {
 /* Large Serif Branding Banner */
 .branding-banner-section {
   background-color: var(--white);
-  border-bottom: 1px solid var(--border);
-  padding: 1.75rem 0;
+  padding: 2.5rem 0 1.5rem 0;
   text-align: center;
 }
 
@@ -408,22 +422,24 @@ button, input, select {
 }
 
 .banner-title-large {
-  font-family: var(--font-title);
-  font-size: 2.75rem;
-  font-weight: 700;
-  color: var(--primary);
-  letter-spacing: 0.5px;
-  line-height: 1.2;
+  font-family: "Old English Text MT", "Cloister Black", "UnifrakturMaguntia", "Pirata One", Georgia, serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 400; /* Old English/gothic fonts should not use bold weight as it distorts their strokes */
+  color: #00388d;   /* The classic deep royal blue from the screenshot */
+  letter-spacing: 0px;
+  line-height: 1.15;
+  text-align: center;
 }
 
 .banner-subtitle-large {
-  font-family: var(--font-sans);
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #1e3a8a;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-top: 0.4rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 700;
+  color: #007bff;   /* Bright blue subtitle from the screenshot */
+  letter-spacing: 0.5px;
+  text-transform: none; /* Matches CamelCase from the screenshot */
+  margin-top: 0.5rem;
+  text-align: center;
 }
 
 /* Hero Slider Section */
