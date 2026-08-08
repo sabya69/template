@@ -29,9 +29,8 @@
       </div>
       <div class="top-bar-right">
         <div class="lang-selector">
-          <button class="lang-btn active" data-lang="en">EN</button>
-          <button class="lang-btn" data-lang="hi">HI</button>
-          <button class="lang-btn" data-lang="bn">BN</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn active" data-lang="hi">HI</button>
         </div>
         <div class="social-icons">
           <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -147,22 +146,9 @@
         Executive committee members of the Tripura State Centre representing multiple divisions, managing local policies and engineering sessions.
       </p>
 
-      <!-- Registry table container -->
-      <div class="registry-table-wrapper">
-        <table class="registry-table">
-          <thead>
-            <tr>
-              <th>Photo</th>
-              <th>Name</th>
-              <th>Designation</th>
-              <th>Department / Division</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="homeCommitteeTableBody">
-            <!-- Dynamically populated from localStorage via index.js -->
-          </tbody>
-        </table>
+      <!-- Registry card grid container -->
+      <div class="committee-grid" id="homeCommitteeGrid">
+        <!-- Dynamically populated from localStorage via index.js -->
       </div>
     </div>
   </section>

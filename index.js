@@ -51,24 +51,24 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 10, title: "National Thermal Engineer Day on 24.07.2023", category: "news", date: "08 Jul 2026", pdf: true, status: "Published" }
   ];
 
-  const defaultAvatar = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23a0aec0"><rect width="24" height="24" fill="%23edf2f7"/><circle cx="12" cy="8" r="4"/><path d="M12 14c-6.1 0-8 4-8 4v2h16v-2s-1.9-4-8-4z"/></svg>';
+  const defaultAvatar = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PGNpcmNsZSBjeD0nMTInIGN5PScxMicgcj0nMTInIGZpbGw9JyNlNWU3ZWInLz48Y2lyY2xlIGN4PScxMicgY3k9JzkuNScgcj0nMy41JyBmaWxsPScjOWNhM2FmJy8+PHBhdGggZD0nTTEyIDE0LjVjLTMuNSAwLTUuMiAyLTUuNSAzLjVoMTFjLS4zLTEuNS0yLTMuNS01LTMuNXonIGZpbGw9JyM5Y2EzYWYnLz48L3N2Zz4=';
 
   const defaultMembers = [
-    { id: 1, name: "Er. Paramananda Sarkar Banerjee", designation: "Chairman", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
-    { id: 2, name: "Er. B.K. Roy", designation: "Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
-    { id: 3, name: "Er. Partha Pratim Datta", designation: "Vice Chairman", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
-    { id: 4, name: "Er. S. Debbarma", designation: "Vice Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
-    { id: 5, name: "Er. Ananta Ram Debbarma", designation: "Honorary Secretary", department: "Mechanical Engineering", status: "Active", image: defaultAvatar },
-    { id: 6, name: "Er. A.K. Gupta", designation: "Honorary Secretary", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
-    { id: 7, name: "Er. Pradip Kumar Dey", designation: "Honorary Treasurer", department: "Computer Science", status: "Active", image: defaultAvatar },
-    { id: 8, name: "Er. P. Saha", designation: "Honorary Treasurer", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
-    { id: 9, name: "Er. Bishwajit Debbarma", designation: "Executive Member", department: "Civil Engineering", status: "Active", image: defaultAvatar },
-    { id: 10, name: "Er. R. Chakraborty", designation: "Executive Committee Member", department: "Civil Engineering Division", status: "Active", image: defaultAvatar },
-    { id: 11, name: "Er. Somenath Bhowmik", designation: "Executive Member", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
-    { id: 12, name: "Er. M. Das", designation: "Executive Committee Member", department: "Electrical Engineering Division", status: "Active", image: defaultAvatar },
-    { id: 13, name: "Er. Ratan Kumar Das", designation: "Executive Member", department: "Mechanical Engineering", status: "Active", image: defaultAvatar },
-    { id: 14, name: "Er. Subrata Bhowmik", designation: "Executive Member", department: "Production Engineering", status: "Active", image: defaultAvatar },
-    { id: 15, name: "Er. Arun Kumar Nath", designation: "Executive Member", department: "Chemical Engineering", status: "Active", image: defaultAvatar }
+    { id: 1, name: "Er. Paramananda Sarkar Banerjee", designation: "Chairman", department: "Electrical Engineering", status: "Active", image: "assets/1.jpg", email: "p.s.banerjee@iei-tripura.org" },
+    { id: 2, name: "Er. B.K. Roy", designation: "Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar, email: "bkroy@iei-tripura.org" },
+    { id: 3, name: "Er. Partha Pratim Datta", designation: "Vice Chairman", department: "Electrical Engineering", status: "Active", image: defaultAvatar, email: "ppdatta@iei-tripura.org" },
+    { id: 4, name: "Er. S. Debbarma", designation: "Vice Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar, email: "sdebbarma@iei-tripura.org" },
+    { id: 5, name: "Er. Ananta Ram Debbarma", designation: "Honorary Secretary", department: "Mechanical Engineering", status: "Active", image: defaultAvatar, email: "ardebbarma@iei-tripura.org" },
+    { id: 6, name: "Er. A.K. Gupta", designation: "Honorary Secretary", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar, email: "akgupta@iei-tripura.org" },
+    { id: 7, name: "Er. Pradip Kumar Dey", designation: "Honorary Treasurer", department: "Computer Science", status: "Active", image: defaultAvatar, email: "pkdey@iei-tripura.org" },
+    { id: 8, name: "Er. P. Saha", designation: "Honorary Treasurer", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar, email: "psaha@iei-tripura.org" },
+    { id: 9, name: "Er. Bishwajit Debbarma", designation: "Executive Member", department: "Civil Engineering", status: "Active", image: defaultAvatar, email: "bdebbarma@iei-tripura.org" },
+    { id: 10, name: "Er. R. Chakraborty", designation: "Executive Committee Member", department: "Civil Engineering Division", status: "Active", image: defaultAvatar, email: "rchakraborty@iei-tripura.org" },
+    { id: 11, name: "Er. Somenath Bhowmik", designation: "Executive Member", department: "Electrical Engineering", status: "Active", image: defaultAvatar, email: "sbhowmik@iei-tripura.org" },
+    { id: 12, name: "Er. M. Das", designation: "Executive Committee Member", department: "Electrical Engineering Division", status: "Active", image: defaultAvatar, email: "mdas@iei-tripura.org" },
+    { id: 13, name: "Er. Ratan Kumar Das", designation: "Executive Member", department: "Mechanical Engineering", status: "Active", image: defaultAvatar, email: "rkdas@iei-tripura.org" },
+    { id: 14, name: "Er. Subrata Bhowmik", designation: "Executive Member", department: "Production Engineering", status: "Active", image: defaultAvatar, email: "subrata.b@iei-tripura.org" },
+    { id: 15, name: "Er. Arun Kumar Nath", designation: "Executive Member", department: "Chemical Engineering", status: "Active", image: defaultAvatar, email: "aknath@iei-tripura.org" }
   ];
 
   const defaultGallery = [
@@ -807,24 +807,38 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 9. SUB-PAGE DYNAMIC RENDERING LOGIC ---
 
   // 9a. About Page: Committee Registry
-  const committeeTableBody = document.getElementById('homeCommitteeTableBody');
-  if (committeeTableBody) {
-    committeeTableBody.innerHTML = '';
+  const committeeGrid = document.getElementById('homeCommitteeGrid');
+  if (committeeGrid) {
+    committeeGrid.innerHTML = '';
     const storedMembers = JSON.parse(localStorage.getItem('ieiMembers')) || [];
-    const membersList = storedMembers.map(m => ({
-      ...m,
-      image: m.image || defaultAvatar
-    }));
+    const membersList = storedMembers.map(m => {
+      let img = m.image || defaultAvatar;
+      if (m.id === 1 && (!m.image || m.image.startsWith('data:'))) {
+        img = 'assets/1.jpg';
+      }
+      return {
+        ...m,
+        image: img,
+        email: m.email || (m.name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@iei-tripura.org')
+      };
+    });
     membersList.forEach(m => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><img src="${m.image}" alt="${m.name}" class="member-avatar" onerror="this.onerror=null; this.src='${defaultAvatar}';"></td>
-        <td style="font-weight: 700; color: var(--primary);">${m.name}</td>
-        <td style="font-weight: 600; color: #1e3a8a;">${m.designation}</td>
-        <td style="font-weight: 500;">${m.department}</td>
-        <td><span class="status-badge active" style="background-color: var(--success-bg); color: var(--success); font-size: 0.75rem; font-weight:700; padding: 0.2rem 0.5rem; border-radius:50px;">${m.status}</span></td>
+      const card = document.createElement('div');
+      card.className = 'member-card';
+      card.innerHTML = `
+        <div class="member-card-img-wrapper">
+          <img src="${m.image}" alt="${m.name}" class="member-card-img" onerror="this.onerror=null; this.src='${defaultAvatar}';">
+        </div>
+        <h4 class="member-card-name">${m.name}</h4>
+        <div class="member-card-designation">${m.designation.toUpperCase()}</div>
+        <p class="member-card-dept">${m.department}</p>
+        <div class="member-card-email-wrapper">
+          <a href="mailto:${m.email}" class="member-card-email-btn">
+            <i class="fa-solid fa-envelope"></i> <span>${m.email}</span>
+          </a>
+        </div>
       `;
-      committeeTableBody.appendChild(tr);
+      committeeGrid.appendChild(card);
     });
   }
 

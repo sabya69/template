@@ -35,24 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 10, title: "IEI Technical Webinar on \"Renewable Energy: Opportunities, Key Challenges and Potential\"", date: "2023-02-17", type: "webinar" }
   ];
 
-  const defaultAvatar = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23a0aec0"><rect width="24" height="24" fill="%23edf2f7"/><circle cx="12" cy="8" r="4"/><path d="M12 14c-6.1 0-8 4-8 4v2h16v-2s-1.9-4-8-4z"/></svg>';
+  const defaultAvatar = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PGNpcmNsZSBjeD0nMTInIGN5PScxMicgcj0nMTInIGZpbGw9JyNlNWU3ZWInLz48Y2lyY2xlIGN4PScxMicgY3k9JzkuNScgcj0nMy41JyBmaWxsPScjOWNhM2FmJy8+PHBhdGggZD0nTTEyIDE0LjVjLTMuNSAwLTUuMiAyLTUuNSAzLjVoMTFjLS4zLTEuNS0yLTMuNS01LTMuNXonIGZpbGw9JyM5Y2EzYWYnLz48L3N2Zz4=';
 
   const defaultMembers = [
-    { id: 1, name: "Er. Paramananda Sarkar Banerjee", designation: "Chairman", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
-    { id: 2, name: "Er. B.K. Roy", designation: "Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
-    { id: 3, name: "Er. Partha Pratim Datta", designation: "Vice Chairman", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
-    { id: 4, name: "Er. S. Debbarma", designation: "Vice Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
-    { id: 5, name: "Er. Ananta Ram Debbarma", designation: "Honorary Secretary", department: "Mechanical Engineering", status: "Active", image: defaultAvatar },
-    { id: 6, name: "Er. A.K. Gupta", designation: "Honorary Secretary", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
-    { id: 7, name: "Er. Pradip Kumar Dey", designation: "Honorary Treasurer", department: "Computer Science", status: "Active", image: defaultAvatar },
-    { id: 8, name: "Er. P. Saha", designation: "Honorary Treasurer", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
-    { id: 9, name: "Er. Bishwajit Debbarma", designation: "Executive Member", department: "Civil Engineering", status: "Active", image: defaultAvatar },
-    { id: 10, name: "Er. R. Chakraborty", designation: "Executive Committee Member", department: "Civil Engineering Division", status: "Active", image: defaultAvatar },
-    { id: 11, name: "Er. Somenath Bhowmik", designation: "Executive Member", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
-    { id: 12, name: "Er. M. Das", designation: "Executive Committee Member", department: "Electrical Engineering Division", status: "Active", image: defaultAvatar },
-    { id: 13, name: "Er. Ratan Kumar Das", designation: "Executive Member", department: "Mechanical Engineering", status: "Active", image: defaultAvatar },
-    { id: 14, name: "Er. Subrata Bhowmik", designation: "Executive Member", department: "Production Engineering", status: "Active", image: defaultAvatar },
-    { id: 15, name: "Er. Arun Kumar Nath", designation: "Executive Member", department: "Chemical Engineering", status: "Active", image: defaultAvatar }
+    { id: 1, name: "Er. Paramananda Sarkar Banerjee", designation: "Chairman", department: "Electrical Engineering", status: "Active", image: "assets/1.jpg", email: "p.s.banerjee@iei-tripura.org" },
+    { id: 2, name: "Er. B.K. Roy", designation: "Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar, email: "bkroy@iei-tripura.org" },
+    { id: 3, name: "Er. Partha Pratim Datta", designation: "Vice Chairman", department: "Electrical Engineering", status: "Active", image: defaultAvatar, email: "ppdatta@iei-tripura.org" },
+    { id: 4, name: "Er. S. Debbarma", designation: "Vice Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar, email: "sdebbarma@iei-tripura.org" },
+    { id: 5, name: "Er. Ananta Ram Debbarma", designation: "Honorary Secretary", department: "Mechanical Engineering", status: "Active", image: defaultAvatar, email: "ardebbarma@iei-tripura.org" },
+    { id: 6, name: "Er. A.K. Gupta", designation: "Honorary Secretary", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar, email: "akgupta@iei-tripura.org" },
+    { id: 7, name: "Er. Pradip Kumar Dey", designation: "Honorary Treasurer", department: "Computer Science", status: "Active", image: defaultAvatar, email: "pkdey@iei-tripura.org" },
+    { id: 8, name: "Er. P. Saha", designation: "Honorary Treasurer", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar, email: "psaha@iei-tripura.org" },
+    { id: 9, name: "Er. Bishwajit Debbarma", designation: "Executive Member", department: "Civil Engineering", status: "Active", image: defaultAvatar, email: "bdebbarma@iei-tripura.org" },
+    { id: 10, name: "Er. R. Chakraborty", designation: "Executive Committee Member", department: "Civil Engineering Division", status: "Active", image: defaultAvatar, email: "rchakraborty@iei-tripura.org" },
+    { id: 11, name: "Er. Somenath Bhowmik", designation: "Executive Member", department: "Electrical Engineering", status: "Active", image: defaultAvatar, email: "sbhowmik@iei-tripura.org" },
+    { id: 12, name: "Er. M. Das", designation: "Executive Committee Member", department: "Electrical Engineering Division", status: "Active", image: defaultAvatar, email: "mdas@iei-tripura.org" },
+    { id: 13, name: "Er. Ratan Kumar Das", designation: "Executive Member", department: "Mechanical Engineering", status: "Active", image: defaultAvatar, email: "rkdas@iei-tripura.org" },
+    { id: 14, name: "Er. Subrata Bhowmik", designation: "Executive Member", department: "Production Engineering", status: "Active", image: defaultAvatar, email: "subrata.b@iei-tripura.org" },
+    { id: 15, name: "Er. Arun Kumar Nath", designation: "Executive Member", department: "Chemical Engineering", status: "Active", image: defaultAvatar, email: "aknath@iei-tripura.org" }
   ];
 
   const defaultNewsletters = [
@@ -104,10 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
     banners: JSON.parse(localStorage.getItem('ieiBanners')) || defaultBanners,
     news: JSON.parse(localStorage.getItem('ieiNews')) || defaultNews,
     events: JSON.parse(localStorage.getItem('ieiEvents')) || defaultEvents,
-    members: (JSON.parse(localStorage.getItem('ieiMembers')) || defaultMembers).map(m => ({
-      ...m,
-      image: m.image || defaultAvatar
-    })),
+    members: (JSON.parse(localStorage.getItem('ieiMembers')) || defaultMembers).map(m => {
+      let img = m.image || defaultAvatar;
+      if (m.id === 1 && (!m.image || m.image.startsWith('data:'))) {
+        img = 'assets/1.jpg';
+      }
+      return {
+        ...m,
+        image: img,
+        email: m.email || (m.name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@iei-tripura.org')
+      };
+    }),
     newsletters: JSON.parse(localStorage.getItem('ieiNewsletters')) || defaultNewsletters,
     statistics: JSON.parse(localStorage.getItem('ieiStatistics')) || defaultStatistics,
     gallery: JSON.parse(localStorage.getItem('ieiGallery')) || defaultGallery
@@ -352,31 +359,42 @@ document.addEventListener('DOMContentLoaded', () => {
       const memberUploadContainer = document.getElementById('memberUploadContainer');
 
       if (memberUploadBtn && memberFileInput) {
-        memberUploadBtn.addEventListener('click', () => {
+        // Prevent duplicate listener registration
+        const newUploadBtn = memberUploadBtn.cloneNode(true);
+        memberUploadBtn.parentNode.replaceChild(newUploadBtn, memberUploadBtn);
+        
+        newUploadBtn.addEventListener('click', () => {
           memberFileInput.click();
         });
 
         if (memberUploadContainer) {
-          memberUploadContainer.addEventListener('click', (e) => {
-            if (e.target !== memberFileInput && e.target !== memberUploadBtn) {
-              memberFileInput.click();
+          const newContainer = memberUploadContainer.cloneNode(true);
+          memberUploadContainer.parentNode.replaceChild(newContainer, memberUploadContainer);
+          // retrieve file input from new container
+          const freshFileInput = newContainer.querySelector('#memberFileInput');
+          const freshImageInput = document.getElementById('member_image');
+          const freshUploadBtn = newContainer.querySelector('#memberUploadBtn');
+          
+          newContainer.addEventListener('click', (e) => {
+            if (e.target !== freshFileInput && e.target !== freshUploadBtn) {
+              freshFileInput.click();
+            }
+          });
+
+          freshFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                if (freshImageInput) {
+                  freshImageInput.value = event.target.result;
+                }
+                freshUploadBtn.innerText = `Uploaded: ${file.name.slice(0, 15)}...`;
+              };
+              reader.readAsDataURL(file);
             }
           });
         }
-
-        memberFileInput.addEventListener('change', (e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-              if (memberImageInput) {
-                memberImageInput.value = event.target.result; // Set base64 string
-              }
-              memberUploadBtn.innerText = `Uploaded: ${file.name.slice(0, 15)}...`;
-            };
-            reader.readAsDataURL(file);
-          }
-        });
       }
     }
   };
@@ -461,6 +479,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="form-group">
           <label>Department / Division</label>
           <input type="text" id="member_department" value="${item ? item.department : ''}" placeholder="e.g. Electrical Engineering" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="member_email" value="${item ? (item.email || '') : ''}" placeholder="e.g. member@iei-tripura.org">
         </div>
         <div class="form-group">
           <label>Profile Photo</label>
@@ -567,6 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
           designation: document.getElementById('member_designation').value.trim(),
           department: document.getElementById('member_department').value.trim(),
           image: document.getElementById('member_image').value.trim() || defaultAvatar,
+          email: document.getElementById('member_email').value.trim() || (document.getElementById('member_name').value.trim().toLowerCase().replace(/[^a-z0-9]/g, '') + '@iei-tripura.org'),
           status: "Active"
         };
       } 
@@ -685,11 +708,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     state.members.forEach(item => {
       const tr = document.createElement('tr');
+      const emailVal = item.email || (item.name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@iei-tripura.org');
       tr.innerHTML = `
         <td><img src="${item.image || defaultAvatar}" alt="Photo" class="member-thumbnail" onerror="this.onerror=null; this.src='${defaultAvatar}';"></td>
         <td style="font-weight: 700;">${item.name}</td>
         <td style="font-weight: 600;">${item.designation}</td>
         <td>${item.department}</td>
+        <td style="color: var(--blue-active); font-weight: 500;">${emailVal}</td>
         <td><span class="status-pill published">${item.status}</span></td>
         <td>
           <button class="action-btn edit-btn" onclick="openCrudItem('members', ${item.id})" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
