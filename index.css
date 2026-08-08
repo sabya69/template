@@ -286,10 +286,10 @@ button, input, select {
 
 .brand-subtitle {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--muted);
-  line-height: 1.2;
+  font-size: 0.95rem; /* Larger font size as requested */
+  font-weight: 600;   /* Sligthly bolder for better legibility */
+  color: #475569;     /* Slightly darker grey for better contrast */
+  line-height: 1.25;
 }
 
 /* Navigation Menu */
@@ -433,12 +433,12 @@ button, input, select {
 
 .banner-subtitle-large {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem); /* Increased size for visual balance */
   font-weight: 700;
   color: #007bff;   /* Bright blue subtitle from the screenshot */
   letter-spacing: 0.5px;
   text-transform: none; /* Matches CamelCase from the screenshot */
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   text-align: center;
 }
 
