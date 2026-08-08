@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="News & newsletters - The Institution of Engineers (India), Tripura State Centre.">
+  <title>News & Newsletters - The Institution of Engineers (India)</title>
+  
+  <!-- Google Fonts: Inter for UI/Body, Outfit for Headings, Playfair Display for branding -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=UnifrakturMaguntia&family=Pirata+One&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6.4.0 CDN for modern icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Top Utility Bar -->
+  <div class="top-bar">
+    <div class="top-bar-container">
+      <div class="top-bar-left">
+        <a href="tel:03812304700" class="contact-link"><i class="fa-solid fa-phone"></i> <span>(0381) 230 4700</span></a>
+        <a href="mailto:ieitripura@gmail.com" class="contact-link"><i class="fa-solid fa-envelope"></i> <span>ieitripura@gmail.com</span></a>
+        <span class="contact-text"><i class="fa-solid fa-location-dot"></i> <span>Pandit Nehru Complex, Gurkhabasti, P.O.-Kunjaban, Agartala, Tripura - 799006</span></span>
+      </div>
+      <div class="top-bar-right">
+        <div class="lang-selector">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="hi">HI</button>
+          <button class="lang-btn" data-lang="bn">BN</button>
+        </div>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <!-- Left side: Brand Logo -->
+      <div class="header-left">
+        <div class="logo-wrapper">
+          <img src="assets/logo.jpg" alt="IEI Logo" class="iei-logo-img">
+          <div class="brand-text">
+            <h1 class="brand-title">The Institution of Engineers</h1>
+            <h2 class="brand-subtitle">(India) - Tripura State Centre</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center: Navigation Menu -->
+      <nav class="header-center">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="dropdown">
+            <a href="about.html" class="nav-link">About <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="about.html">About IEI</a></li>
+              <li><a href="about.html">Tripura State Centre</a></li>
+              <li><a href="about.html#committee">Committee Members</a></li>
+              <li><a href="about.html">Past Chairmen & Secretaries</a></li>
+            </ul>
+          </li>
+          <li><a href="news.html" class="nav-link active">News</a></li>
+          <li><a href="events.html" class="nav-link">Events</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="news.html" class="nav-link">Newsletters</a></li>
+          <li><a href="news.html" class="nav-link">Notices</a></li>
+          <li><a href="#footer" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right side: Actions -->
+      <div class="header-right">
+        <button class="search-btn" aria-label="Search site" id="searchBtn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button id="openLoginBtn" class="btn btn-primary btn-join">
+          <span>Join IEI</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Styled Page Title Header -->
+  <section class="page-title-banner">
+    <div class="container">
+      <h2 class="page-banner-title">News & Newsletters</h2>
+      <div class="page-banner-breadcrumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; <span>News</span></div>
+    </div>
+  </section>
+
+  <!-- Main News Content Grid -->
+  <section class="sub-page-content">
+    <div class="container">
+      <div class="news-page-grid-layout">
+        
+        <!-- Left: News listings list -->
+        <div class="news-list-panel">
+          <h3 class="about-section-heading">News & Announcements</h3>
+          <div class="section-divider"></div>
+          
+          <div class="news-cards-container" id="homeNewsCardsContainer">
+            <!-- Dynamically populated from localStorage via index.js -->
+          </div>
+        </div>
+
+        <!-- Right: Newsletter download list -->
+        <div class="newsletters-archive-panel">
+          <div class="archive-card">
+            <h4 class="archive-card-title"><i class="fa-solid fa-file-pdf"></i> Newsletter Archive</h4>
+            <p style="font-size:0.8rem; color:var(--muted); margin-bottom:1.5rem;">Access previously published volumes and issues of the IEI Tripura newsletter in PDF format.</p>
+            <div class="newsletters-archive-list" id="homeNewslettersArchiveList">
+              <!-- Dynamically populated from localStorage via index.js -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer" id="footer">
+    <div class="container footer-grid-container">
+      <!-- Col 1: Bio -->
+      <div class="footer-column footer-bio-col">
+        <div class="footer-logo-row">
+          <img src="assets/logo.jpg" alt="IEI Logo" class="iei-logo-img">
+          <span class="footer-brand-title">IEI Tripura <span class="accent-text">STATE CENTRE</span></span>
+        </div>
+        <p class="footer-bio-text">
+          The Institution of Engineers (India), Tripura State Centre - Serving the engineering community since 1920.
+        </p>
+        <div class="footer-social-row">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer-column">
+        <h4 class="footer-col-title">Quick Links</h4>
+        <ul class="footer-links-list">
+          <li><a href="about.html">About IEI</a></li>
+          <li><a href="about.html#committee">Membership</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="#footer">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Divisions -->
+      <div class="footer-column">
+        <h4 class="footer-col-title">Engineering Divisions</h4>
+        <ul class="footer-links-list">
+          <li><a href="#">Civil Engineering</a></li>
+          <li><a href="#">Mechanical Engineering</a></li>
+          <li><a href="#">Electrical Engineering</a></li>
+          <li><a href="#">Computer Science</a></li>
+          <li><a href="#">Chemical Engineering</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Contact -->
+      <div class="footer-column">
+        <h4 class="footer-col-title">Contact Info</h4>
+        <ul class="footer-contact-details">
+          <li>
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Pandit Nehru Complex, Gurkhabasti, Agartala – 799006</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-phone"></i>
+            <a href="tel:03812304700">(0381) 230 4700</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:ieitripura@gmail.com">ieitripura@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="footer-bottom-bar">
+      <div class="container footer-bottom-container">
+        <span>&copy; 2026 The Institution of Engineers (India), Tripura State Centre. All Rights Reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login Modal Overlay (Portal Secure Sign In) -->
+  <div id="loginModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-logo">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>IEI Secure Sign In</span>
+        </div>
+        <button id="closeLoginBtn" class="close-btn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="modal-title">Sign in to IEI Portal</h3>
+        <p class="modal-subtitle">Choose your member role and enter credentials.</p>
+        <form id="loginForm" novalidate>
+          <div class="role-selector">
+            <label class="role-option">
+              <input type="radio" name="role" value="student_member" required>
+              <div class="role-box">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Student</span>
+              </div>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="role" value="corporate_member">
+              <div class="role-box">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Corporate</span>
+              </div>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="role" value="officer">
+              <div class="role-box">
+                <i class="fa-solid fa-building-columns"></i>
+                <span>Officer</span>
+              </div>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="role" value="admin">
+              <div class="role-box">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Admin</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="input-group">
+            <label for="username">Username / Member ID</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input type="text" id="username" autocomplete="off" placeholder="Enter Member ID or Username" required>
+              <i class="fa-solid fa-circle-check status-icon success"></i>
+              <i class="fa-solid fa-circle-exclamation status-icon error"></i>
+            </div>
+            <div class="validation-checklist" id="usernameChecklist">
+              <div class="checklist-title">Username requirements:</div>
+              <div class="check-item" data-rule="length"><i class="fa-solid fa-circle-xmark"></i> 8-15 characters</div>
+              <div class="check-item" data-rule="uppercase"><i class="fa-solid fa-circle-xmark"></i> At least 1 UPPERCASE letter</div>
+              <div class="check-item" data-rule="special"><i class="fa-solid fa-circle-xmark"></i> At least 1 special character</div>
+              <div class="check-item" data-rule="nospaces"><i class="fa-solid fa-circle-xmark"></i> No spaces</div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="password" placeholder="Enter password" required>
+              <button type="button" id="togglePasswordBtn" class="toggle-password-btn" aria-label="Toggle password visibility">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <i class="fa-solid fa-circle-check status-icon success"></i>
+              <i class="fa-solid fa-circle-exclamation status-icon error"></i>
+            </div>
+            <div class="validation-checklist" id="passwordChecklist">
+              <div class="checklist-title">Password requirements:</div>
+              <div class="check-item" data-rule="length"><i class="fa-solid fa-circle-xmark"></i> 8-15 characters</div>
+              <div class="check-item" data-rule="uppercase"><i class="fa-solid fa-circle-xmark"></i> At least 1 UPPERCASE letter</div>
+              <div class="check-item" data-rule="lowercase"><i class="fa-solid fa-circle-xmark"></i> At least 1 lowercase letter</div>
+              <div class="check-item" data-rule="number"><i class="fa-solid fa-circle-xmark"></i> At least 1 digit (0-9)</div>
+              <div class="check-item" data-rule="special"><i class="fa-solid fa-circle-xmark"></i> At least 1 special character</div>
+              <div class="check-item" data-rule="nospaces"><i class="fa-solid fa-circle-xmark"></i> No spaces</div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="captchaInput">Security Verification</label>
+            <div class="captcha-container">
+              <div class="captcha-box" id="captchaBox">A58bY</div>
+              <button type="button" class="btn-refresh" id="refreshCaptchaBtn" title="Refresh Captcha">
+                <i class="fa-solid fa-rotate"></i>
+              </button>
+              <input type="text" id="captchaInput" placeholder="Enter CAPTCHA" autocomplete="off" required>
+            </div>
+            <span class="error-msg" id="captchaError">Incorrect CAPTCHA, please try again.</span>
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn btn-primary btn-submit" disabled>
+            <span>Sign In</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <div class="form-footer-links">
+            <a href="#" class="forgot-pass-link">Forgot Password?</a>
+            <span>Need Help? <a href="#">Contact Support</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JS -->
+  <script src="index.js"></script>
+</body>
+</html>

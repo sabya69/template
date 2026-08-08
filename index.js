@@ -33,12 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const defaultNewsletters = [
-    { id: 1, title: "IEI Tripura Newsletter - April 2026", issue: "Vol. 5, Issue 4", date: "08 Jul 2026", pdf: true, status: "Published" },
-    { id: 2, title: "IEI Tripura Newsletter - May 2026", issue: "Vol. 5, Issue 5", date: "08 Jul 2026", pdf: true, status: "Published" },
-    { id: 3, title: "IEI, TSC Newsletter__October, 2022", issue: "IEI, TSC Newsletter__October, 2022", date: "08 Jul 2026", pdf: true, status: "Published" }
+    { id: 1, title: "IEI Tripura Newsletter - April 2026", issue: "Vol. 5, Issue 4", date: "08 Jul 2026", pdf: true, status: "Published", fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf" },
+    { id: 2, title: "IEI Tripura Newsletter - May 2026", issue: "Vol. 5, Issue 5", date: "08 Jul 2026", pdf: true, status: "Published", fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf" },
+    { id: 3, title: "IEI, TSC Newsletter__October, 2022", issue: "IEI, TSC Newsletter__October, 2022", date: "08 Jul 2026", pdf: true, status: "Published", fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf" }
   ];
 
   // Retrieve states
+  const newslettersFromStorage = JSON.parse(localStorage.getItem('ieiNewsletters'));
+  if (newslettersFromStorage && newslettersFromStorage.length > 0 && !newslettersFromStorage[0].fileUrl) {
+    localStorage.removeItem('ieiNewsletters'); // reset stale cache
+  }
+
   const activeBanners = (JSON.parse(localStorage.getItem('ieiBanners')) || defaultBanners).filter(b => b.active);
   const eventsList = JSON.parse(localStorage.getItem('ieiEvents')) || defaultEvents;
   const statsList = (JSON.parse(localStorage.getItem('ieiStatistics')) || defaultStatistics).filter(s => s.status === 'Active');
@@ -423,11 +428,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const dlBtn = document.getElementById('downloadNewsletterBtn');
     if (dlBtn) {
-      dlBtn.replaceWith(dlBtn.cloneNode(true)); // remove old listeners
-      document.getElementById('downloadNewsletterBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        showToast(`Downloading Newsletter: ${latest.title.replace(/\s+/g, '_')}.pdf`);
-      });
+      const fileUrl = latest.fileUrl || 'assets/IEI-TSC-Newsletter__April-2021.pdf';
+      dlBtn.setAttribute('href', fileUrl);
+      dlBtn.setAttribute('download', `${latest.title.replace(/\s+/g, '_')}.pdf`);
     }
   };
 
@@ -743,4 +746,161 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3500);
   };
 
+  // --- 9. SUB-PAGE DYNAMIC RENDERING LOGIC ---
+
+  // 9a. About Page: Committee Registry
+  const committeeTableBody = document.getElementById('homeCommitteeTableBody');
+  if (committeeTableBody) {
+    committeeTableBody.innerHTML = '';
+    const membersList = JSON.parse(localStorage.getItem('ieiMembers')) || [];
+    membersList.forEach(m => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="font-weight: 700; color: var(--primary);">${m.name}</td>
+        <td style="font-weight: 600; color: #1e3a8a;">${m.designation}</td>
+        <td style="font-weight: 500;">${m.department}</td>
+        <td><span class="status-badge active" style="background-color: var(--success-bg); color: var(--success); font-size: 0.75rem; font-weight:700; padding: 0.2rem 0.5rem; border-radius:50px;">${m.status}</span></td>
+      `;
+      committeeTableBody.appendChild(tr);
+    });
+  }
+
+  // 9b. News Page: News Cards & Newsletters Archive
+  const newsCardsContainer = document.getElementById('homeNewsCardsContainer');
+  if (newsCardsContainer) {
+    newsCardsContainer.innerHTML = '';
+    const newsList = JSON.parse(localStorage.getItem('ieiNews')) || [];
+    if (newsList.length === 0) {
+      newsCardsContainer.innerHTML = `<div class="no-events">No news updates available.</div>`;
+    } else {
+      newsList.forEach(n => {
+        const card = document.createElement('div');
+        card.className = 'news-page-card';
+        card.innerHTML = `
+          <div class="news-page-card-header">
+            <span class="news-page-category ${n.category}">${n.category}</span>
+            <span class="news-page-date"><i class="fa-solid fa-clock"></i> ${n.date}</span>
+          </div>
+          <h4 class="news-page-title">${n.title}</h4>
+          <p class="news-page-desc">Official news update regarding the Tripura State Centre's general engineering divisions and sessions.</p>
+          ${n.pdf ? `<a href="#" class="news-pdf-link" onclick="event.preventDefault(); alert('Downloading Document: ${n.title.replace(/\s+/g, '_')}.pdf')"><i class="fa-solid fa-file-pdf"></i> Download Attachment PDF</a>` : ''}
+        `;
+        newsCardsContainer.appendChild(card);
+      });
+    }
+  }
+
+  const newslettersArchiveList = document.getElementById('homeNewslettersArchiveList');
+  if (newslettersArchiveList) {
+    newslettersArchiveList.innerHTML = '';
+    const newslettersList = JSON.parse(localStorage.getItem('ieiNewsletters')) || [];
+    newslettersList.forEach(nl => {
+      const item = document.createElement('div');
+      item.className = 'newsletter-archive-item';
+      const fileUrl = nl.fileUrl || 'assets/IEI-TSC-Newsletter__April-2021.pdf';
+      item.innerHTML = `
+        <div class="nl-archive-left">
+          <span class="nl-archive-issue">${nl.issue}</span>
+          <h5 class="nl-archive-title">${nl.title}</h5>
+          <span class="nl-archive-date">Published: ${nl.date}</span>
+        </div>
+        <a href="${fileUrl}" download="${nl.title.replace(/\s+/g, '_')}.pdf" class="btn-download-archive" title="Download PDF" style="text-decoration:none;">
+          <i class="fa-solid fa-download"></i>
+        </a>
+      `;
+      newslettersArchiveList.appendChild(item);
+    });
+  }
+
+  // 9c. Gallery Page: Image Grid & Lightbox
+  const galleryGrid = document.getElementById('homeGalleryGrid');
+  const galleryFilterTabs = document.getElementById('homeGalleryFilterTabs');
+  let activeFilter = 'All';
+
+  const renderHomeGallery = () => {
+    if (!galleryGrid) return;
+    galleryGrid.innerHTML = '';
+    const galleryList = JSON.parse(localStorage.getItem('ieiGallery')) || [];
+    
+    // Render Filter buttons dynamically if not loaded
+    if (galleryFilterTabs && galleryFilterTabs.innerHTML.trim() === '') {
+      const categories = ['All', ...new Set(galleryList.map(img => img.category))];
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = `filter-tab-btn ${cat === activeFilter ? 'active' : ''}`;
+        const count = cat === 'All' ? galleryList.length : galleryList.filter(img => img.category === cat).length;
+        btn.innerText = `${cat} (${count})`;
+        btn.addEventListener('click', () => {
+          activeFilter = cat;
+          document.querySelectorAll('#homeGalleryFilterTabs .filter-tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderHomeGallery();
+        });
+        galleryFilterTabs.appendChild(btn);
+      });
+    }
+
+    const filtered = activeFilter === 'All' 
+      ? galleryList 
+      : galleryList.filter(img => img.category === activeFilter);
+
+    if (filtered.length === 0) {
+      galleryGrid.innerHTML = `<div class="no-events" style="grid-column: span 4; padding: 4rem; text-align:center;">No gallery images found under category: ${activeFilter}.</div>`;
+      return;
+    }
+
+    filtered.forEach(img => {
+      const item = document.createElement('div');
+      item.className = 'gallery-grid-item';
+      item.innerHTML = `
+        <img src="${img.image || 'assets/logo.jpg'}" alt="${img.title}">
+        <div class="gallery-grid-overlay">
+          <span class="gallery-grid-category">${img.category}</span>
+          <h5 class="gallery-grid-title">${img.title}</h5>
+        </div>
+      `;
+      // Lightbox click trigger
+      item.addEventListener('click', () => {
+        openLightbox(img.image || 'assets/logo.jpg', `${img.category} - ${img.title}`);
+      });
+      galleryGrid.appendChild(item);
+    });
+  };
+
+  const openLightbox = (src, caption) => {
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    
+    if (lightboxModal && lightboxImg && lightboxCaption) {
+      lightboxImg.src = src;
+      lightboxCaption.innerText = caption;
+      lightboxModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const closeLightbox = () => {
+    const lightboxModal = document.getElementById('lightboxModal');
+    if (lightboxModal) {
+      lightboxModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  const closeLightboxBtn = document.getElementById('closeLightboxBtn');
+  if (closeLightboxBtn) {
+    closeLightboxBtn.addEventListener('click', closeLightbox);
+  }
+  const lightboxModal = document.getElementById('lightboxModal');
+  if (lightboxModal) {
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) closeLightbox();
+    });
+  }
+
+  // Gallery render initialization
+  renderHomeGallery();
+
 });
+

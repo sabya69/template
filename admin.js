@@ -54,9 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const defaultNewsletters = [
-    { id: 1, title: "IEI Tripura Newsletter - April 2026", issue: "Vol. 5, Issue 4", date: "08 Jul 2026", pdf: true, status: "Published" },
-    { id: 2, title: "IEI Tripura Newsletter - May 2026", issue: "Vol. 5, Issue 5", date: "08 Jul 2026", pdf: true, status: "Published" },
-    { id: 3, title: "IEI, TSC Newsletter__October, 2022", issue: "IEI, TSC Newsletter__October, 2022", date: "08 Jul 2026", pdf: true, status: "Published" },
+    { id: 1, title: "IEI Tripura Newsletter - April 2026", issue: "Vol. 5, Issue 4", date: "08 Jul 2026", pdf: true, status: "Published", fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf" },
+    { id: 2, title: "IEI Tripura Newsletter - May 2026", issue: "Vol. 5, Issue 5", date: "08 Jul 2026", pdf: true, status: "Published", fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf" },
+    { id: 3, title: "IEI, TSC Newsletter__October, 2022", issue: "IEI, TSC Newsletter__October, 2022", date: "08 Jul 2026", pdf: true, status: "Published", fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf" },
     { id: 4, title: "IEI, TSC Newsletter__October, 2021", issue: "IEI, TSC Newsletter__October, 2021", date: "08 Jul 2026", pdf: true, status: "Published" },
     { id: 5, title: "\\nlEI, TSC Newsletter__October, 2020", issue: "\\nlEI, TSC Newsletter__October, 2020.pdf", date: "08 Jul 2026", pdf: true, status: "Published" },
     { id: 6, title: "IEI, TSC Newsletter__July, 2022", issue: "IEI, TSC Newsletter__July, 2022", date: "08 Jul 2026", pdf: true, status: "Published" },
@@ -93,6 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   // Load from local storage or set defaults
+  const newslettersFromStorage = JSON.parse(localStorage.getItem('ieiNewsletters'));
+  if (newslettersFromStorage && newslettersFromStorage.length > 0 && !newslettersFromStorage[0].fileUrl) {
+    localStorage.removeItem('ieiNewsletters'); // reset stale cache
+  }
+
   let state = {
     banners: JSON.parse(localStorage.getItem('ieiBanners')) || defaultBanners,
     news: JSON.parse(localStorage.getItem('ieiNews')) || defaultNews,
@@ -518,7 +523,8 @@ document.addEventListener('DOMContentLoaded', () => {
           issue: document.getElementById('nl_issue').value.trim(),
           date: document.getElementById('nl_date').value.trim(),
           pdf: true,
-          status: "Published"
+          status: "Published",
+          fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf"
         };
       }
 

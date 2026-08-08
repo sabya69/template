@@ -1979,3 +1979,506 @@ section {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ==========================================================================
+   SUB-PAGE WORKSPACE STYLING (About, News, Events, Gallery)
+   ========================================================================== */
+
+/* Sub-page Banner */
+.page-title-banner {
+  background: linear-gradient(135deg, #020d1e 0%, #061d3f 100%);
+  padding: 3rem 0;
+  border-bottom: 4px solid var(--accent);
+  color: var(--white);
+  text-align: left;
+}
+
+.page-banner-title {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.page-banner-breadcrumbs {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.page-banner-breadcrumbs a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.page-banner-breadcrumbs a:hover {
+  color: var(--white);
+}
+
+.sub-page-content {
+  padding: 5rem 0;
+  background-color: #f8fafc;
+}
+
+/* 1. About Page Layout */
+.about-grid-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.sub-heading-gold {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.about-section-heading {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.about-details-panel p {
+  color: #475569;
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+.vision-mission-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.vm-block-card {
+  background-color: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  transition: var(--transition);
+}
+
+.vm-block-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border-color: rgba(229, 169, 59, 0.2);
+}
+
+.vm-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.vm-icon-row i {
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+
+.vm-block-card p {
+  color: #64748b;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Committee Registry Grid Table */
+.committee-registry-section {
+  padding: 5rem 0;
+  background-color: var(--white);
+  border-top: 1px solid #e2e8f0;
+}
+
+.registry-table-wrapper {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+  overflow-x: auto;
+  margin-top: 3rem;
+}
+
+.registry-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.registry-table th {
+  background-color: #f8fafc;
+  padding: 1rem 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #475569;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.registry-table td {
+  padding: 1.15rem 1.5rem;
+  font-size: 0.9rem;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.registry-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* 2. News Page Layout */
+.news-page-grid-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.news-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.news-page-card {
+  background-color: var(--white);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+  transition: var(--transition);
+}
+
+.news-page-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+  border-color: rgba(6, 29, 63, 0.1);
+}
+
+.news-page-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.news-page-category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+}
+
+.news-page-category.news { background-color: rgba(6, 29, 63, 0.08); color: var(--primary); }
+.news-page-category.workshop { background-color: rgba(0, 123, 255, 0.08); color: #007bff; }
+.news-page-category.seminar { background-color: rgba(229, 169, 59, 0.08); color: #c48b26; }
+.news-page-category.webinar { background-color: rgba(20, 184, 166, 0.08); color: #0d9488; }
+.news-page-category.event { background-color: rgba(16, 185, 129, 0.08); color: #059669; }
+
+.news-page-date {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.news-page-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+}
+
+.news-page-desc {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.news-pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #dc2626;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  background-color: rgba(220, 38, 38, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.news-pdf-link:hover {
+  background-color: rgba(220, 38, 38, 0.1);
+}
+
+/* Newsletters Archive Panel */
+.archive-card {
+  background-color: var(--white);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.archive-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.archive-card-title i {
+  color: #dc2626;
+}
+
+.newsletters-archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.newsletter-archive-item {
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.newsletter-archive-item:hover {
+  background-color: #f8fafc;
+  border-color: rgba(229, 169, 59, 0.2);
+}
+
+.nl-archive-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nl-archive-issue {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.nl-archive-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.nl-archive-date {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.btn-download-archive {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.btn-download-archive:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+/* 3. Events Page Calendar Grid */
+.calendar-layout-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* 4. Gallery Page Layout */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.gallery-grid-item {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  background-color: #e2e8f0;
+}
+
+.gallery-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gallery-grid-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(2, 13, 30, 0.95) 0%, rgba(2, 13, 30, 0.4) 60%, rgba(2, 13, 30, 0.1) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-grid-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-grid-item:hover .gallery-grid-overlay {
+  opacity: 1;
+}
+
+.gallery-grid-category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+}
+
+.gallery-grid-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+/* 5. Lightbox Modal Component */
+.lightbox-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(2, 13, 30, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 3rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 300;
+}
+
+.lightbox-close:hover {
+  color: var(--white);
+}
+
+.lightbox-card {
+  max-width: 85%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.lightbox-overlay.active .lightbox-card {
+  transform: scale(1);
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 72vh;
+  border-radius: var(--radius-md);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+}
+
+.lightbox-caption {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--white);
+  margin-top: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Sub-page Responsive Overrides */
+@media (max-width: 1024px) {
+  .about-grid-layout, .news-page-grid-layout, .calendar-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
