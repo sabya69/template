@@ -35,22 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 10, title: "IEI Technical Webinar on \"Renewable Energy: Opportunities, Key Challenges and Potential\"", date: "2023-02-17", type: "webinar" }
   ];
 
+  const defaultAvatar = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23a0aec0"><rect width="24" height="24" fill="%23edf2f7"/><circle cx="12" cy="8" r="4"/><path d="M12 14c-6.1 0-8 4-8 4v2h16v-2s-1.9-4-8-4z"/></svg>';
+
   const defaultMembers = [
-    { id: 1, name: "Er. Paramananda Sarkar Banerjee", designation: "Chairman", department: "Electrical Engineering", status: "Active" },
-    { id: 2, name: "Er. B.K. Roy", designation: "Chairman", department: "IEI Tripura State Centre", status: "Active" },
-    { id: 3, name: "Er. Partha Pratim Datta", designation: "Vice Chairman", department: "Electrical Engineering", status: "Active" },
-    { id: 4, name: "Er. S. Debbarma", designation: "Vice Chairman", department: "IEI Tripura State Centre", status: "Active" },
-    { id: 5, name: "Er. Ananta Ram Debbarma", designation: "Honorary Secretary", department: "Mechanical Engineering", status: "Active" },
-    { id: 6, name: "Er. A.K. Gupta", designation: "Honorary Secretary", department: "IEI Tripura State Centre", status: "Active" },
-    { id: 7, name: "Er. Pradip Kumar Dey", designation: "Honorary Treasurer", department: "Computer Science", status: "Active" },
-    { id: 8, name: "Er. P. Saha", designation: "Honorary Treasurer", department: "IEI Tripura State Centre", status: "Active" },
-    { id: 9, name: "Er. Bishwajit Debbarma", designation: "Executive Member", department: "Civil Engineering", status: "Active" },
-    { id: 10, name: "Er. R. Chakraborty", designation: "Executive Committee Member", department: "Civil Engineering Division", status: "Active" },
-    { id: 11, name: "Er. Somenath Bhowmik", designation: "Executive Member", department: "Electrical Engineering", status: "Active" },
-    { id: 12, name: "Er. M. Das", designation: "Executive Committee Member", department: "Electrical Engineering Division", status: "Active" },
-    { id: 13, name: "Er. Ratan Kumar Das", designation: "Executive Member", department: "Mechanical Engineering", status: "Active" },
-    { id: 14, name: "Er. Subrata Bhowmik", designation: "Executive Member", department: "Production Engineering", status: "Active" },
-    { id: 15, name: "Er. Arun Kumar Nath", designation: "Executive Member", department: "Chemical Engineering", status: "Active" }
+    { id: 1, name: "Er. Paramananda Sarkar Banerjee", designation: "Chairman", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
+    { id: 2, name: "Er. B.K. Roy", designation: "Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
+    { id: 3, name: "Er. Partha Pratim Datta", designation: "Vice Chairman", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
+    { id: 4, name: "Er. S. Debbarma", designation: "Vice Chairman", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
+    { id: 5, name: "Er. Ananta Ram Debbarma", designation: "Honorary Secretary", department: "Mechanical Engineering", status: "Active", image: defaultAvatar },
+    { id: 6, name: "Er. A.K. Gupta", designation: "Honorary Secretary", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
+    { id: 7, name: "Er. Pradip Kumar Dey", designation: "Honorary Treasurer", department: "Computer Science", status: "Active", image: defaultAvatar },
+    { id: 8, name: "Er. P. Saha", designation: "Honorary Treasurer", department: "IEI Tripura State Centre", status: "Active", image: defaultAvatar },
+    { id: 9, name: "Er. Bishwajit Debbarma", designation: "Executive Member", department: "Civil Engineering", status: "Active", image: defaultAvatar },
+    { id: 10, name: "Er. R. Chakraborty", designation: "Executive Committee Member", department: "Civil Engineering Division", status: "Active", image: defaultAvatar },
+    { id: 11, name: "Er. Somenath Bhowmik", designation: "Executive Member", department: "Electrical Engineering", status: "Active", image: defaultAvatar },
+    { id: 12, name: "Er. M. Das", designation: "Executive Committee Member", department: "Electrical Engineering Division", status: "Active", image: defaultAvatar },
+    { id: 13, name: "Er. Ratan Kumar Das", designation: "Executive Member", department: "Mechanical Engineering", status: "Active", image: defaultAvatar },
+    { id: 14, name: "Er. Subrata Bhowmik", designation: "Executive Member", department: "Production Engineering", status: "Active", image: defaultAvatar },
+    { id: 15, name: "Er. Arun Kumar Nath", designation: "Executive Member", department: "Chemical Engineering", status: "Active", image: defaultAvatar }
   ];
 
   const defaultNewsletters = [
@@ -102,7 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
     banners: JSON.parse(localStorage.getItem('ieiBanners')) || defaultBanners,
     news: JSON.parse(localStorage.getItem('ieiNews')) || defaultNews,
     events: JSON.parse(localStorage.getItem('ieiEvents')) || defaultEvents,
-    members: JSON.parse(localStorage.getItem('ieiMembers')) || defaultMembers,
+    members: (JSON.parse(localStorage.getItem('ieiMembers')) || defaultMembers).map(m => ({
+      ...m,
+      image: m.image || defaultAvatar
+    })),
     newsletters: JSON.parse(localStorage.getItem('ieiNewsletters')) || defaultNewsletters,
     statistics: JSON.parse(localStorage.getItem('ieiStatistics')) || defaultStatistics,
     gallery: JSON.parse(localStorage.getItem('ieiGallery')) || defaultGallery
@@ -338,6 +343,42 @@ document.addEventListener('DOMContentLoaded', () => {
     
     generateModalFields(type, editId);
     crudModal.classList.add('active');
+
+    // Attach dynamic listeners for members upload
+    if (type === 'members') {
+      const memberUploadBtn = document.getElementById('memberUploadBtn');
+      const memberFileInput = document.getElementById('memberFileInput');
+      const memberImageInput = document.getElementById('member_image');
+      const memberUploadContainer = document.getElementById('memberUploadContainer');
+
+      if (memberUploadBtn && memberFileInput) {
+        memberUploadBtn.addEventListener('click', () => {
+          memberFileInput.click();
+        });
+
+        if (memberUploadContainer) {
+          memberUploadContainer.addEventListener('click', (e) => {
+            if (e.target !== memberFileInput && e.target !== memberUploadBtn) {
+              memberFileInput.click();
+            }
+          });
+        }
+
+        memberFileInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              if (memberImageInput) {
+                memberImageInput.value = event.target.result; // Set base64 string
+              }
+              memberUploadBtn.innerText = `Uploaded: ${file.name.slice(0, 15)}...`;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+    }
   };
 
   const closeCrudModal = () => {
@@ -420,6 +461,15 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="form-group">
           <label>Department / Division</label>
           <input type="text" id="member_department" value="${item ? item.department : ''}" placeholder="e.g. Electrical Engineering" required>
+        </div>
+        <div class="form-group">
+          <label>Profile Photo</label>
+          <div class="file-upload-container" id="memberUploadContainer">
+            <i class="fa-solid fa-upload"></i>
+            <button type="button" class="upload-dummy-btn" id="memberUploadBtn">${item && item.image && !item.image.startsWith('data:') ? 'Change Photo' : 'Upload Photo'}</button>
+            <input type="file" id="memberFileInput" style="display: none;" accept="image/*">
+          </div>
+          <input type="text" id="member_image" value="${item ? (item.image || '') : ''}" placeholder="Or enter Image URL">
         </div>
       `;
     } 
@@ -516,6 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
           name: document.getElementById('member_name').value.trim(),
           designation: document.getElementById('member_designation').value.trim(),
           department: document.getElementById('member_department').value.trim(),
+          image: document.getElementById('member_image').value.trim() || defaultAvatar,
           status: "Active"
         };
       } 
@@ -635,6 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
     state.members.forEach(item => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
+        <td><img src="${item.image || defaultAvatar}" alt="Photo" class="member-thumbnail" onerror="this.onerror=null; this.src='${defaultAvatar}';"></td>
         <td style="font-weight: 700;">${item.name}</td>
         <td style="font-weight: 600;">${item.designation}</td>
         <td>${item.department}</td>
@@ -804,6 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (action === 'add-member') {
         openCrudModal('members');
       }
+    });
   });
 
   // --- 6b. FILE UPLOAD HANDLER FOR BANNERS ---

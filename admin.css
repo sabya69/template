@@ -551,6 +551,16 @@ button, input, select, textarea {
   background-color: #e5e7eb;
 }
 
+.member-thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border);
+  display: block;
+}
+
 .banner-text-info {
   display: flex;
   flex-direction: column;
