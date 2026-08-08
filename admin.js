@@ -397,6 +397,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+    else if (type === 'gallery') {
+      const galleryUploadBtn = document.getElementById('galleryUploadBtn');
+      const galleryFileInput = document.getElementById('galleryFileInput');
+      const galleryImageInput = document.getElementById('gal_image');
+      const galleryUploadContainer = document.getElementById('galleryUploadContainer');
+
+      if (galleryUploadBtn && galleryFileInput) {
+        // Prevent duplicate listener registration
+        const newUploadBtn = galleryUploadBtn.cloneNode(true);
+        galleryUploadBtn.parentNode.replaceChild(newUploadBtn, galleryUploadBtn);
+        
+        newUploadBtn.addEventListener('click', () => {
+          galleryFileInput.click();
+        });
+
+        if (galleryUploadContainer) {
+          const newContainer = galleryUploadContainer.cloneNode(true);
+          galleryUploadContainer.parentNode.replaceChild(newContainer, galleryUploadContainer);
+          // retrieve file input from new container
+          const freshFileInput = newContainer.querySelector('#galleryFileInput');
+          const freshImageInput = document.getElementById('gal_image');
+          const freshUploadBtn = newContainer.querySelector('#galleryUploadBtn');
+          
+          newContainer.addEventListener('click', (e) => {
+            if (e.target !== freshFileInput && e.target !== freshUploadBtn) {
+              freshFileInput.click();
+            }
+          });
+
+          freshFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                if (freshImageInput) {
+                  freshImageInput.value = event.target.result;
+                }
+                freshUploadBtn.innerText = `Uploaded: ${file.name.slice(0, 15)}...`;
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+        }
+      }
+    }
   };
 
   const closeCrudModal = () => {
@@ -549,8 +594,13 @@ document.addEventListener('DOMContentLoaded', () => {
           </select>
         </div>
         <div class="form-group">
-          <label>Image URL</label>
-          <input type="text" id="gal_image" value="${item ? item.image : 'assets/logo.jpg'}" required>
+          <label>Image Upload</label>
+          <div class="file-upload-container" id="galleryUploadContainer">
+            <i class="fa-solid fa-upload"></i>
+            <button type="button" class="upload-dummy-btn" id="galleryUploadBtn">${item && item.image && !item.image.startsWith('data:') ? 'Change Image' : 'Upload Image'}</button>
+            <input type="file" id="galleryFileInput" style="display: none;" accept="image/*">
+          </div>
+          <input type="text" id="gal_image" value="${item ? item.image : 'assets/logo.jpg'}" placeholder="Or enter Image URL" required>
         </div>
       `;
     }
