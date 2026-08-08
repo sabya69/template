@@ -278,10 +278,10 @@ button, input, select {
 
 .brand-title {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
   font-weight: 800;
   color: var(--primary);
-  line-height: 1.2;
+  line-height: 1.25;
+  font-size: 1.25rem; /* Slightly larger size as requested */
 }
 
 .brand-subtitle {
@@ -2481,4 +2481,13 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+/* Custom building slide adjustment to hide the top black cut */
+.slide-background[style*="iei_building"] {
+  transform: translateY(-9%) scale(1.3) !important;
+}
+.slide.active .slide-background[style*="iei_building"] {
+  transform: translateY(-9%) scale(1.35) !important;
+}
+
 

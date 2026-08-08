@@ -38,11 +38,67 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 3, title: "IEI, TSC Newsletter__October, 2022", issue: "IEI, TSC Newsletter__October, 2022", date: "08 Jul 2026", pdf: true, status: "Published", fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf" }
   ];
 
-  // Retrieve states
-  const newslettersFromStorage = JSON.parse(localStorage.getItem('ieiNewsletters'));
-  if (newslettersFromStorage && newslettersFromStorage.length > 0 && !newslettersFromStorage[0].fileUrl) {
-    localStorage.removeItem('ieiNewsletters'); // reset stale cache
+  const defaultNews = [
+    { id: 1, title: "Workshop on Green Building Technologies", category: "workshop", date: "08 Jul 2026", pdf: false, status: "Published" },
+    { id: 2, title: "National Conference on Engineering Innovations", category: "seminar", date: "08 Jul 2026", pdf: false, status: "Published" },
+    { id: 3, title: "Webinar on Smart Metering and Net Metering", category: "webinar", date: "08 Jul 2026", pdf: false, status: "Published" },
+    { id: 4, title: "IEI Tripura Organizes Technical Talk on Sustainable Infrastructure", category: "news", date: "08 Jul 2026", pdf: false, status: "Published" },
+    { id: 5, title: "World Environment Day Celebration at IEI Tripura", category: "news", date: "08 Jul 2026", pdf: false, status: "Published" },
+    { id: 6, title: "Seminar on \"Robotics and Automation: Shaping the Future of Engineering\"", category: "news", date: "08 Jul 2026", pdf: false, status: "Published" },
+    { id: 7, title: "6th M.L. Dasgupta Memorial Lecture on 18.08.2023", category: "news", date: "08 Jul 2026", pdf: true, status: "Published" },
+    { id: 8, title: "77th Independence Day", category: "event", date: "08 Jul 2026", pdf: true, status: "Published" },
+    { id: 9, title: "IEI News", category: "news", date: "08 Jul 2026", pdf: true, status: "Published" },
+    { id: 10, title: "National Thermal Engineer Day on 24.07.2023", category: "news", date: "08 Jul 2026", pdf: true, status: "Published" }
+  ];
+
+  const defaultMembers = [
+    { id: 1, name: "Er. Paramananda Sarkar Banerjee", designation: "Chairman", department: "Electrical Engineering", status: "Active" },
+    { id: 2, name: "Er. B.K. Roy", designation: "Chairman", department: "IEI Tripura State Centre", status: "Active" },
+    { id: 3, name: "Er. Partha Pratim Datta", designation: "Vice Chairman", department: "Electrical Engineering", status: "Active" },
+    { id: 4, name: "Er. S. Debbarma", designation: "Vice Chairman", department: "IEI Tripura State Centre", status: "Active" },
+    { id: 5, name: "Er. Ananta Ram Debbarma", designation: "Honorary Secretary", department: "Mechanical Engineering", status: "Active" },
+    { id: 6, name: "Er. A.K. Gupta", designation: "Honorary Secretary", department: "IEI Tripura State Centre", status: "Active" },
+    { id: 7, name: "Er. Pradip Kumar Dey", designation: "Honorary Treasurer", department: "Computer Science", status: "Active" },
+    { id: 8, name: "Er. P. Saha", designation: "Honorary Treasurer", department: "IEI Tripura State Centre", status: "Active" },
+    { id: 9, name: "Er. Bishwajit Debbarma", designation: "Executive Member", department: "Civil Engineering", status: "Active" },
+    { id: 10, name: "Er. R. Chakraborty", designation: "Executive Committee Member", department: "Civil Engineering Division", status: "Active" },
+    { id: 11, name: "Er. Somenath Bhowmik", designation: "Executive Member", department: "Electrical Engineering", status: "Active" },
+    { id: 12, name: "Er. M. Das", designation: "Executive Committee Member", department: "Electrical Engineering Division", status: "Active" },
+    { id: 13, name: "Er. Ratan Kumar Das", designation: "Executive Member", department: "Mechanical Engineering", status: "Active" },
+    { id: 14, name: "Er. Subrata Bhowmik", designation: "Executive Member", department: "Production Engineering", status: "Active" },
+    { id: 15, name: "Er. Arun Kumar Nath", designation: "Executive Member", department: "Chemical Engineering", status: "Active" }
+  ];
+
+  const defaultGallery = [
+    { id: 1, title: "Inaugural Ceremony", category: "Inaugurations", image: "assets/meeting1.png" },
+    { id: 2, title: "State Seminar Session", category: "Seminars", image: "assets/meeting2.png" },
+    { id: 3, title: "Committee Briefing Meeting", category: "Events", image: "assets/meeting3.png" },
+    { id: 4, title: "World Engineering Day Event", category: "World Engineering Day", image: "assets/meeting4.png" },
+    { id: 5, title: "IEI Bhawan Front view", category: "IEI Bhawan", image: "assets/iei_building.png" },
+    { id: 6, title: "Technical Lecture Series", category: "Technical Talks", image: "assets/meeting1.png" },
+    { id: 7, title: "Yoga Day Celebration", category: "International Yoga Day", image: "assets/meeting2.png" },
+    { id: 8, title: "World Environment Day Tree Planting", category: "World Environment Day", image: "assets/meeting3.png" },
+    { id: 9, title: "58th Engineers Day Celebration", category: "Celebrations", image: "assets/meeting4.png" },
+    { id: 10, title: "Memorial Lecture event", category: "Memorial Lectures", image: "assets/meeting1.png" }
+  ];
+
+  // Retrieve states & auto-initialize if not set
+  const newslettersFromStorage = localStorage.getItem('ieiNewsletters');
+  if (newslettersFromStorage) {
+    const parsed = JSON.parse(newslettersFromStorage);
+    if (parsed.length > 0 && !parsed[0].fileUrl) {
+      localStorage.removeItem('ieiNewsletters'); // clear stale cache
+    }
   }
+
+  // Double check and write defaults into localStorage
+  if (!localStorage.getItem('ieiBanners')) localStorage.setItem('ieiBanners', JSON.stringify(defaultBanners));
+  if (!localStorage.getItem('ieiNews')) localStorage.setItem('ieiNews', JSON.stringify(defaultNews));
+  if (!localStorage.getItem('ieiEvents')) localStorage.setItem('ieiEvents', JSON.stringify(defaultEvents));
+  if (!localStorage.getItem('ieiMembers')) localStorage.setItem('ieiMembers', JSON.stringify(defaultMembers));
+  if (!localStorage.getItem('ieiNewsletters')) localStorage.setItem('ieiNewsletters', JSON.stringify(defaultNewsletters));
+  if (!localStorage.getItem('ieiStatistics')) localStorage.setItem('ieiStatistics', JSON.stringify(defaultStatistics));
+  if (!localStorage.getItem('ieiGallery')) localStorage.setItem('ieiGallery', JSON.stringify(defaultGallery));
 
   const activeBanners = (JSON.parse(localStorage.getItem('ieiBanners')) || defaultBanners).filter(b => b.active);
   const eventsList = JSON.parse(localStorage.getItem('ieiEvents')) || defaultEvents;
