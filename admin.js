@@ -289,6 +289,9 @@ document.addEventListener('DOMContentLoaded', () => {
       bannerFormTitle.innerText = "Add Banner";
       bannerEditId.value = '';
       bannerSubmitBtn.innerText = "Create";
+      if (document.getElementById('bannerUploadBtn')) {
+        document.getElementById('bannerUploadBtn').innerText = "Upload Image";
+      }
     });
   }
 
@@ -801,8 +804,41 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (action === 'add-member') {
         openCrudModal('members');
       }
-    });
   });
+
+  // --- 6b. FILE UPLOAD HANDLER FOR BANNERS ---
+  const bannerUploadBtn = document.getElementById('bannerUploadBtn');
+  const bannerFileInput = document.getElementById('bannerFileInput');
+  const bannerImageUrl = document.getElementById('bannerImageUrl');
+
+  if (bannerUploadBtn && bannerFileInput) {
+    bannerUploadBtn.addEventListener('click', () => {
+      bannerFileInput.click();
+    });
+
+    const uploadContainer = document.querySelector('.file-upload-container');
+    if (uploadContainer) {
+      uploadContainer.addEventListener('click', (e) => {
+        if (e.target !== bannerFileInput && e.target !== bannerUploadBtn) {
+          bannerFileInput.click();
+        }
+      });
+    }
+
+    bannerFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          if (bannerImageUrl) {
+            bannerImageUrl.value = event.target.result; // Set base64 string
+          }
+          bannerUploadBtn.innerText = `Uploaded: ${file.name.slice(0, 15)}...`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
 
 
   // --- 7. LOGOUT REDIRECT ---
