@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 1. STATE INITIALIZATION ---
   const defaultBanners = [
-    { id: 1, title: "IEI building", subtitle: "Tripura State Centre Headquarters", image: "assets/iei_building.png", btnText: "View Facilities", btnUrl: "#", active: true, order: 1 },
-    { id: 2, title: "The Institution of Engineers (India)", subtitle: "Tripura State Centre - A Century of Service to the Nation", image: "assets/seminar_hero.png", btnText: "Learn More", btnUrl: "#", active: true, order: 2 },
-    { id: 3, title: "Technical Innovation & Professional Growth", subtitle: "Serving the Engineering Community", image: "assets/meeting1.png", btnText: "Read More", btnUrl: "#", active: true, order: 3 }
+    { id: 1, title: "IEI building", subtitle: "Tripura State Centre Headquarters", image: "assets/iei_building.png", btnText: "View Facilities", btnUrl: "#", active: true, order: 1, date: "August - September 2026", time: "", place: "IEI Building, Agartala" },
+    { id: 2, title: "The Institution of Engineers (India)", subtitle: "Tripura State Centre - A Century of Service to the Nation", image: "assets/seminar_hero.png", btnText: "Learn More", btnUrl: "#", active: true, order: 2, date: "20th August, 2025", time: "", place: "Seminar Hall, Agartala" },
+    { id: 3, title: "Technical Innovation & Professional Growth", subtitle: "Serving the Engineering Community", image: "assets/meeting1.png", btnText: "Read More", btnUrl: "#", active: true, order: 3, date: "Upcoming Session", time: "", place: "Conference Room, Agartala" }
   ];
 
   const defaultNews = [
@@ -98,6 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const newslettersFromStorage = JSON.parse(localStorage.getItem('ieiNewsletters'));
   if (newslettersFromStorage && newslettersFromStorage.length > 0 && !newslettersFromStorage[0].fileUrl) {
     localStorage.removeItem('ieiNewsletters'); // reset stale cache
+  }
+
+  const bannersFromStorage = JSON.parse(localStorage.getItem('ieiBanners'));
+  if (bannersFromStorage && bannersFromStorage.length > 0 && bannersFromStorage[0].date === undefined) {
+    localStorage.removeItem('ieiBanners'); // reset stale cache
   }
 
   let state = {
@@ -278,6 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = document.getElementById('bannerTitle').value.trim();
       const subtitle = document.getElementById('bannerSubtitle').value.trim();
       const imageUrl = document.getElementById('bannerImageUrl').value.trim() || 'assets/logo.jpg';
+      const date = document.getElementById('bannerDate').value.trim();
+      const time = document.getElementById('bannerTime').value.trim();
+      const place = document.getElementById('bannerPlace').value.trim();
       const btnText = document.getElementById('bannerBtnText').value.trim() || 'Learn More';
       const btnUrl = document.getElementById('bannerBtnUrl').value.trim() || '#';
       const order = parseInt(document.getElementById('bannerOrder').value) || 0;
@@ -287,12 +295,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Edit Mode
         const bannerIndex = state.banners.findIndex(b => b.id === parseInt(idVal));
         if (bannerIndex > -1) {
-          state.banners[bannerIndex] = { ...state.banners[bannerIndex], title, subtitle, image: imageUrl, btnText, btnUrl, order, active };
+          state.banners[bannerIndex] = { ...state.banners[bannerIndex], title, subtitle, image: imageUrl, date, time, place, btnText, btnUrl, order, active };
         }
       } else {
         // Create Mode
         const newId = state.banners.length > 0 ? Math.max(...state.banners.map(b => b.id)) + 1 : 1;
-        state.banners.push({ id: newId, title, subtitle, image: imageUrl, btnText, btnUrl, order, active });
+        state.banners.push({ id: newId, title, subtitle, image: imageUrl, date, time, place, btnText, btnUrl, order, active });
       }
 
       saveState();
@@ -304,6 +312,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (document.getElementById('bannerUploadBtn')) {
         document.getElementById('bannerUploadBtn').innerText = "Upload Image";
       }
+      
+      // Reset image preview
+      const previewWrapper = document.getElementById('bannerImagePreviewWrapper');
+      const previewImg = document.getElementById('bannerImagePreview');
+      if (previewWrapper) previewWrapper.style.display = 'none';
+      if (previewImg) previewImg.src = '';
     });
   }
 
@@ -316,10 +330,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('bannerTitle').value = banner.title;
     document.getElementById('bannerSubtitle').value = banner.subtitle || '';
     document.getElementById('bannerImageUrl').value = banner.image;
+    document.getElementById('bannerDate').value = banner.date || '';
+    document.getElementById('bannerTime').value = banner.time || '';
+    document.getElementById('bannerPlace').value = banner.place || '';
     document.getElementById('bannerBtnText').value = banner.btnText || 'Learn More';
     document.getElementById('bannerBtnUrl').value = banner.btnUrl || '#';
     document.getElementById('bannerOrder').value = banner.order || 0;
     document.getElementById('bannerActive').checked = banner.active;
+    
+    // Load image preview
+    const previewWrapper = document.getElementById('bannerImagePreviewWrapper');
+    const previewImg = document.getElementById('bannerImagePreview');
+    if (previewWrapper && previewImg) {
+      if (banner.image) {
+        previewImg.src = banner.image;
+        previewWrapper.style.display = 'block';
+      } else {
+        previewWrapper.style.display = 'none';
+        previewImg.src = '';
+      }
+    }
     
     bannerFormTitle.innerText = "Edit Banner";
     bannerSubmitBtn.innerText = "Save Changes";
@@ -934,10 +964,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 6b. FILE UPLOAD HANDLER FOR BANNERS ---
+  // --- 6b. FILE UPLOAD & PREVIEW HANDLER FOR BANNERS ---
   const bannerUploadBtn = document.getElementById('bannerUploadBtn');
   const bannerFileInput = document.getElementById('bannerFileInput');
   const bannerImageUrl = document.getElementById('bannerImageUrl');
+  const bannerImagePreviewWrapper = document.getElementById('bannerImagePreviewWrapper');
+  const bannerImagePreview = document.getElementById('bannerImagePreview');
+
+  const updateBannerPreview = (src) => {
+    if (bannerImagePreview && bannerImagePreviewWrapper) {
+      if (src) {
+        bannerImagePreview.src = src;
+        bannerImagePreviewWrapper.style.display = 'block';
+      } else {
+        bannerImagePreview.src = '';
+        bannerImagePreviewWrapper.style.display = 'none';
+      }
+    }
+  };
 
   if (bannerUploadBtn && bannerFileInput) {
     bannerUploadBtn.addEventListener('click', () => {
@@ -962,10 +1006,19 @@ document.addEventListener('DOMContentLoaded', () => {
             bannerImageUrl.value = event.target.result; // Set base64 string
           }
           bannerUploadBtn.innerText = `Uploaded: ${file.name.slice(0, 15)}...`;
+          updateBannerPreview(event.target.result);
         };
         reader.readAsDataURL(file);
       }
     });
+  }
+
+  if (bannerImageUrl) {
+    const handleUrlInput = () => {
+      updateBannerPreview(bannerImageUrl.value.trim());
+    };
+    bannerImageUrl.addEventListener('input', handleUrlInput);
+    bannerImageUrl.addEventListener('change', handleUrlInput);
   }
 
 

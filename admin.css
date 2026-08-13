@@ -505,6 +505,25 @@ button, input, select, textarea {
   cursor: pointer;
 }
 
+.image-preview-wrapper {
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-main);
+}
+
+.image-preview-img {
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
 .btn-navy-blue {
   width: 100%;
   padding: 0.65rem;
@@ -549,6 +568,8 @@ button, input, select, textarea {
   border-radius: var(--radius-sm);
   object-fit: cover;
   background-color: #e5e7eb;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .member-thumbnail {

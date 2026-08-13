@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 1. LOCAL STORAGE STATE SYNCHRONIZATION ---
   const defaultBanners = [
-    { id: 1, title: "IEI building", subtitle: "Tripura State Centre Headquarters", image: "assets/iei_building.png", btnText: "View Facilities", btnUrl: "#", active: true, order: 1 },
-    { id: 2, title: "The Institution of Engineers (India)", subtitle: "Tripura State Centre - A Century of Service to the Nation", image: "assets/seminar_hero.png", btnText: "Learn More", btnUrl: "#", active: true, order: 2 },
-    { id: 3, title: "Technical Innovation & Professional Growth", subtitle: "Serving the Engineering Community", image: "assets/meeting1.png", btnText: "Read More", btnUrl: "#", active: true, order: 3 }
+    { id: 1, title: "IEI building", subtitle: "Tripura State Centre Headquarters", image: "assets/iei_building.png", btnText: "View Facilities", btnUrl: "#", active: true, order: 1, date: "August - September 2026", time: "", place: "IEI Building, Agartala" },
+    { id: 2, title: "The Institution of Engineers (India)", subtitle: "Tripura State Centre - A Century of Service to the Nation", image: "assets/seminar_hero.png", btnText: "Learn More", btnUrl: "#", active: true, order: 2, date: "20th August, 2025", time: "", place: "Seminar Hall, Agartala" },
+    { id: 3, title: "Technical Innovation & Professional Growth", subtitle: "Serving the Engineering Community", image: "assets/meeting1.png", btnText: "Read More", btnUrl: "#", active: true, order: 3, date: "Upcoming Session", time: "", place: "Conference Room, Agartala" }
   ];
 
   const defaultEvents = [
@@ -93,6 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  const bannersFromStorage = localStorage.getItem('ieiBanners');
+  if (bannersFromStorage) {
+    const parsed = JSON.parse(bannersFromStorage);
+    if (parsed.length > 0 && parsed[0].date === undefined) {
+      localStorage.removeItem('ieiBanners'); // clear stale cache
+    }
+  }
+
   // Double check and write defaults into localStorage
   if (!localStorage.getItem('ieiBanners')) localStorage.setItem('ieiBanners', JSON.stringify(defaultBanners));
   if (!localStorage.getItem('ieiNews')) localStorage.setItem('ieiNews', JSON.stringify(defaultNews));
@@ -147,6 +155,29 @@ document.addEventListener('DOMContentLoaded', () => {
       // Separate seminar slide styling if title is specific
       const isSeminar = banner.title.toLowerCase().includes('seminar') || banner.title.toLowerCase().includes('institution of engineers');
       
+      // Construct dynamic event details metadata if present
+      let seminarBoxHtml = '';
+      if (banner.date || banner.place) {
+        let metaItems = '';
+        if (banner.date) {
+          metaItems += `<span class="meta-item"><i class="fa-solid fa-calendar-days"></i> ${banner.date}${banner.time ? ' | ' + banner.time : ''}</span>`;
+        }
+        if (banner.place) {
+          metaItems += `<span class="meta-item"><i class="fa-solid fa-location-dot"></i> VENUE: ${banner.place}</span>`;
+        }
+        
+        seminarBoxHtml = `
+          <div class="slide-seminar-box">
+            <div class="seminar-divider"></div>
+            <h4 class="seminar-title">${isSeminar ? banner.title : banner.subtitle}</h4>
+            <p class="seminar-author">Organised By The Institution of Engineers (India), Tripura State Centre</p>
+            <div class="seminar-meta">
+              ${metaItems}
+            </div>
+          </div>
+        `;
+      }
+
       slide.innerHTML = `
         <div class="slide-background" style="background-image: url('${banner.image || 'assets/logo.jpg'}');"></div>
         <div class="slide-overlay"></div>
@@ -156,15 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3 class="slide-org-title">${isSeminar ? 'The Institution of Engineers (India)' : banner.title}</h3>
             <p class="slide-org-subtitle">${isSeminar ? 'Tripura State Centre - A Century of Service to the Nation' : banner.subtitle}</p>
             
-            <div class="slide-seminar-box">
-              <div class="seminar-divider"></div>
-              <h4 class="seminar-title">${isSeminar ? banner.title : banner.subtitle}</h4>
-              <p class="seminar-author">Organised By The Institution of Engineers (India), Tripura State Centre</p>
-              <div class="seminar-meta">
-                <span class="meta-item"><i class="fa-solid fa-calendar-days"></i> 20th August, 2025</span>
-                <span class="meta-item"><i class="fa-solid fa-location-dot"></i> VENUE: Seminar Hall, Agartala</span>
-              </div>
-            </div>
+            ${seminarBoxHtml}
             
             <button class="btn btn-gold learn-more-btn" onclick="window.location.href='${banner.btnUrl}'">
               <span>${banner.btnText || 'Learn More'}</span> <i class="fa-solid fa-chevron-right"></i>
