@@ -344,11 +344,11 @@
           </div>
         </section>
 
-        <!-- 7. NOTICES VIEW (PLACEHOLDER) -->
+        <!-- 7. NOTICES VIEW -->
         <section class="tab-view" id="view-notices">
           <div class="section-header-row">
             <h2 class="view-section-title">Notices</h2>
-            <button class="btn btn-primary" onclick="alert('Demo: Notice created')"><i class="fa-solid fa-plus"></i> Add Notice</button>
+            <button class="btn btn-primary" id="addNewNoticeBtn"><i class="fa-solid fa-plus"></i> Add Notice</button>
           </div>
           <div class="admin-table-card">
             <table class="admin-table">
@@ -360,16 +360,8 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Important Notice regarding Membership Fees Revision</td>
-                  <td>01 Jul 2026</td>
-                  <td><span class="status-pill published">Active</span></td>
-                  <td>
-                    <button class="action-btn edit-btn" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="action-btn delete-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
-                  </td>
-                </tr>
+              <tbody id="noticesTableBody">
+                <!-- Dynamically populated -->
               </tbody>
             </table>
           </div>

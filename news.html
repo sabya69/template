@@ -113,12 +113,20 @@
           </div>
         </div>
 
-        <!-- Right: Newsletter download list -->
+        <!-- Right: Newsletter download list & Notices Board -->
         <div class="newsletters-archive-panel">
           <div class="archive-card">
             <h4 class="archive-card-title"><i class="fa-solid fa-file-pdf"></i> Newsletter Archive</h4>
             <p style="font-size:0.8rem; color:var(--muted); margin-bottom:1.5rem;">Access previously published volumes and issues of the IEI Tripura newsletter in PDF format.</p>
             <div class="newsletters-archive-list" id="homeNewslettersArchiveList">
+              <!-- Dynamically populated from localStorage via index.js -->
+            </div>
+          </div>
+          
+          <div class="archive-card" style="margin-top: 2rem;">
+            <h4 class="archive-card-title"><i class="fa-solid fa-bullhorn" style="color: var(--accent);"></i> Notice Board</h4>
+            <p style="font-size:0.8rem; color:var(--muted); margin-bottom:1.5rem;">Important announcements, circulars, and notifications for members.</p>
+            <div class="newsletters-archive-list" id="homeNoticesBoardList">
               <!-- Dynamically populated from localStorage via index.js -->
             </div>
           </div>

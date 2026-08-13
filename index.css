@@ -601,6 +601,27 @@ button, input, select {
   padding: 2rem;
   gap: 1.5rem;
   z-index: 10;
+  overflow-y: auto;
+}
+
+.slider-highlights-sidebar.scrollable {
+  justify-content: flex-start;
+  padding-right: 1.5rem;
+}
+
+/* Custom premium scrollbar for highlights sidebar */
+.slider-highlights-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.slider-highlights-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.slider-highlights-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.slider-highlights-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(229, 169, 59, 0.5);
 }
 
 .highlight-widget {
@@ -613,6 +634,7 @@ button, input, select {
   color: var(--white);
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .highlight-widget::before {

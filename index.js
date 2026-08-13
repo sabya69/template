@@ -139,7 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Clear static templates
     heroSlider.innerHTML = '';
-    if (sliderHighlightsSidebar) sliderHighlightsSidebar.innerHTML = '';
+    if (sliderHighlightsSidebar) {
+      sliderHighlightsSidebar.innerHTML = '';
+      if (activeBanners.length > 3) {
+        sliderHighlightsSidebar.classList.add('scrollable');
+      } else {
+        sliderHighlightsSidebar.classList.remove('scrollable');
+      }
+    }
     if (sliderIndicators) sliderIndicators.innerHTML = '';
 
     if (activeBanners.length === 0) {

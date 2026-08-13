@@ -94,6 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 10, title: "Memorial Lecture event", category: "Memorial Lectures", image: "assets/meeting1.png" }
   ];
 
+  const defaultNotices = [
+    { id: 1, title: "Important Notice regarding Membership Fees Revision", date: "01 Jul 2026", status: "Active", fileUrl: "" }
+  ];
+
   // Load from local storage or set defaults
   const newslettersFromStorage = JSON.parse(localStorage.getItem('ieiNewsletters'));
   if (newslettersFromStorage && newslettersFromStorage.length > 0 && !newslettersFromStorage[0].fileUrl) {
@@ -122,7 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }),
     newsletters: JSON.parse(localStorage.getItem('ieiNewsletters')) || defaultNewsletters,
     statistics: JSON.parse(localStorage.getItem('ieiStatistics')) || defaultStatistics,
-    gallery: JSON.parse(localStorage.getItem('ieiGallery')) || defaultGallery
+    gallery: JSON.parse(localStorage.getItem('ieiGallery')) || defaultGallery,
+    notices: JSON.parse(localStorage.getItem('ieiNotices')) || defaultNotices
   };
 
   const saveState = () => {
@@ -133,11 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('ieiNewsletters', JSON.stringify(state.newsletters));
     localStorage.setItem('ieiStatistics', JSON.stringify(state.statistics));
     localStorage.setItem('ieiGallery', JSON.stringify(state.gallery));
+    localStorage.setItem('ieiNotices', JSON.stringify(state.notices));
     updateDashboardCounts();
   };
 
   // Initialize storage if empty
-  if (!localStorage.getItem('ieiBanners')) {
+  if (!localStorage.getItem('ieiBanners') || !localStorage.getItem('ieiNotices')) {
     saveState();
   }
 
@@ -218,6 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       case 'statistics':
         renderStatisticsTable();
+        break;
+      case 'notices':
+        renderNoticesTable();
         break;
     }
   };
@@ -472,6 +481,70 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+    else if (type === 'newsletters') {
+      const uploadBtn = document.getElementById('newsletterUploadBtn');
+      const fileInput = document.getElementById('newsletterFileInput');
+      const fileUrlInput = document.getElementById('nl_fileUrl');
+      const container = document.getElementById('newsletterUploadContainer');
+
+      if (uploadBtn && fileInput) {
+        uploadBtn.addEventListener('click', () => {
+          fileInput.click();
+        });
+        if (container) {
+          container.addEventListener('click', (e) => {
+            if (e.target !== fileInput && e.target !== uploadBtn) {
+              fileInput.click();
+            }
+          });
+        }
+        fileInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              if (fileUrlInput) {
+                fileUrlInput.value = event.target.result;
+              }
+              uploadBtn.innerText = `Uploaded: ${file.name.slice(0, 15)}...`;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+    }
+    else if (type === 'notices') {
+      const uploadBtn = document.getElementById('noticeUploadBtn');
+      const fileInput = document.getElementById('noticeFileInput');
+      const fileUrlInput = document.getElementById('notice_fileUrl');
+      const container = document.getElementById('noticeUploadContainer');
+
+      if (uploadBtn && fileInput) {
+        uploadBtn.addEventListener('click', () => {
+          fileInput.click();
+        });
+        if (container) {
+          container.addEventListener('click', (e) => {
+            if (e.target !== fileInput && e.target !== uploadBtn) {
+              fileInput.click();
+            }
+          });
+        }
+        fileInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              if (fileUrlInput) {
+                fileUrlInput.value = event.target.result;
+              }
+              uploadBtn.innerText = `Uploaded: ${file.name.slice(0, 15)}...`;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+    }
   };
 
   const closeCrudModal = () => {
@@ -585,6 +658,44 @@ document.addEventListener('DOMContentLoaded', () => {
           <label>Date</label>
           <input type="text" id="nl_date" value="${item ? item.date : '08 Jul 2026'}" required>
         </div>
+        <div class="form-group">
+          <label>Newsletter PDF Upload (Optional)</label>
+          <div class="file-upload-container" id="newsletterUploadContainer">
+            <i class="fa-solid fa-file-pdf" style="color: #ef4444; font-size: 1.25rem;"></i>
+            <button type="button" class="upload-dummy-btn" id="newsletterUploadBtn">${item && item.fileUrl ? 'Change PDF' : 'Upload PDF'}</button>
+            <input type="file" id="newsletterFileInput" style="display: none;" accept="application/pdf">
+          </div>
+          <input type="text" id="nl_fileUrl" value="${item ? (item.fileUrl || '') : ''}" placeholder="Or enter PDF URL">
+        </div>
+      `;
+    }
+    
+    else if (type === 'notices') {
+      modalFormFields.innerHTML = `
+        <div class="form-group">
+          <label>Notice Title</label>
+          <input type="text" id="notice_title" value="${item ? item.title : ''}" required>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="text" id="notice_date" value="${item ? item.date : '08 Jul 2026'}" required>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="notice_status">
+            <option value="Active" ${item && item.status === 'Active' ? 'selected' : ''}>Active</option>
+            <option value="Draft" ${item && item.status === 'Draft' ? 'selected' : ''}>Draft</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Notice PDF Upload (Optional)</label>
+          <div class="file-upload-container" id="noticeUploadContainer">
+            <i class="fa-solid fa-file-pdf" style="color: #ef4444; font-size: 1.25rem;"></i>
+            <button type="button" class="upload-dummy-btn" id="noticeUploadBtn">${item && item.fileUrl ? 'Change PDF' : 'Upload PDF'}</button>
+            <input type="file" id="noticeFileInput" style="display: none;" accept="application/pdf">
+          </div>
+          <input type="text" id="notice_fileUrl" value="${item ? (item.fileUrl || '') : ''}" placeholder="Or enter PDF URL">
+        </div>
       `;
     }
 
@@ -681,7 +792,16 @@ document.addEventListener('DOMContentLoaded', () => {
           date: document.getElementById('nl_date').value.trim(),
           pdf: true,
           status: "Published",
-          fileUrl: "assets/IEI-TSC-Newsletter__April-2021.pdf"
+          fileUrl: document.getElementById('nl_fileUrl').value.trim() || "assets/IEI-TSC-Newsletter__April-2021.pdf"
+        };
+      }
+      
+      else if (type === 'notices') {
+        newItemObj = {
+          title: document.getElementById('notice_title').value.trim(),
+          date: document.getElementById('notice_date').value.trim(),
+          status: document.getElementById('notice_status').value,
+          fileUrl: document.getElementById('notice_fileUrl').value.trim()
         };
       }
 
@@ -847,6 +967,26 @@ document.addEventListener('DOMContentLoaded', () => {
         </td>
       `;
       tableBody.appendChild(tr);
+  };
+
+  // Render Notices Table
+  const renderNoticesTable = () => {
+    const tableBody = document.getElementById('noticesTableBody');
+    if (!tableBody) return;
+    tableBody.innerHTML = '';
+
+    state.notices.forEach(item => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="font-weight: 700;">${item.title}</td>
+        <td>${item.date}</td>
+        <td><span class="status-pill ${item.status === 'Active' ? 'published' : 'draft'}">${item.status}</span></td>
+        <td>
+          <button class="action-btn edit-btn" onclick="openCrudItem('notices', ${item.id})" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+          <button class="action-btn delete-btn" onclick="deleteCrudItem('notices', ${item.id})" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      `;
+      tableBody.appendChild(tr);
     });
   };
 
@@ -946,6 +1086,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bindAddButton('addNewNewsletterBtn', 'newsletters');
   bindAddButton('addNewImageBtn', 'gallery');
   bindAddButton('addNewStatBtn', 'statistics');
+  bindAddButton('addNewNoticeBtn', 'notices');
 
   // Dashboard action shortcuts
   document.querySelectorAll('.quick-act-btn').forEach(btn => {
