@@ -84,6 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 10, title: "Memorial Lecture event", category: "Memorial Lectures", image: "assets/meeting1.png" }
   ];
 
+  const defaultNotices = [
+    { id: 1, title: "Important Notice regarding Membership Fees Revision", date: "01 Jul 2026", status: "Active", fileUrl: "" }
+  ];
+
   // Retrieve states & auto-initialize if not set
   const newslettersFromStorage = localStorage.getItem('ieiNewsletters');
   if (newslettersFromStorage) {
@@ -109,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!localStorage.getItem('ieiNewsletters')) localStorage.setItem('ieiNewsletters', JSON.stringify(defaultNewsletters));
   if (!localStorage.getItem('ieiStatistics')) localStorage.setItem('ieiStatistics', JSON.stringify(defaultStatistics));
   if (!localStorage.getItem('ieiGallery')) localStorage.setItem('ieiGallery', JSON.stringify(defaultGallery));
+  if (!localStorage.getItem('ieiNotices')) localStorage.setItem('ieiNotices', JSON.stringify(defaultNotices));
 
   const activeBanners = (JSON.parse(localStorage.getItem('ieiBanners')) || defaultBanners).filter(b => b.active);
   const eventsList = JSON.parse(localStorage.getItem('ieiEvents')) || defaultEvents;
@@ -917,6 +922,45 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       newslettersArchiveList.appendChild(item);
     });
+  }
+
+  const noticesBoardList = document.getElementById('homeNoticesBoardList');
+  if (noticesBoardList) {
+    noticesBoardList.innerHTML = '';
+    const noticesList = (JSON.parse(localStorage.getItem('ieiNotices')) || defaultNotices).filter(n => n.status === 'Active');
+    if (noticesList.length === 0) {
+      noticesBoardList.innerHTML = `<div class="no-events" style="font-size: 0.8rem; color: var(--muted); padding: 0.5rem 0;">No active notices at this time.</div>`;
+    } else {
+      noticesList.forEach(n => {
+        const item = document.createElement('div');
+        item.className = 'newsletter-archive-item';
+        
+        let actionHtml = '';
+        if (n.fileUrl) {
+          actionHtml = `
+            <a href="${n.fileUrl}" download="${n.title.replace(/\s+/g, '_')}.pdf" class="btn-download-archive" title="Download Attachment" style="text-decoration:none;">
+              <i class="fa-solid fa-download"></i>
+            </a>
+          `;
+        } else {
+          actionHtml = `
+            <span class="btn-download-archive" title="Information Notice" style="opacity: 0.5; cursor: default;">
+              <i class="fa-solid fa-info"></i>
+            </span>
+          `;
+        }
+
+        item.innerHTML = `
+          <div class="nl-archive-left">
+            <span class="nl-archive-issue" style="color: var(--accent); font-weight:700;">NOTICE</span>
+            <h5 class="nl-archive-title">${n.title}</h5>
+            <span class="nl-archive-date">Date: ${n.date}</span>
+          </div>
+          ${actionHtml}
+        `;
+        noticesBoardList.appendChild(item);
+      });
+    }
   }
 
   // 9c. Gallery Page: Image Grid & Lightbox

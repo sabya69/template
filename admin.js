@@ -967,6 +967,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </td>
       `;
       tableBody.appendChild(tr);
+    });
   };
 
   // Render Notices Table
